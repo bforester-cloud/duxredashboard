@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duxre — April 2026 Revenue Operations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0f0ee;--surface:#fff;--surface2:#f7f7f6;
+  --nav:#282828;--border:#e2e2df;--border-dark:#d0d0cc;
+  --red:#EE3135;--red-light:#fff0f2;--red-border:#fcc;
+  --amber:#b45309;--amber-light:#fffbeb;--amber-border:#fde68a;
+  --green:#166534;--green-light:#f0fdf4;--green-border:#bbf7d0;
+  --blue:#1d4ed8;--blue-light:#eff6ff;--blue-border:#bfdbfe;
+  --text:#111;--text2:#555;--text3:#999;
+  --ff:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+}
+body{background:var(--bg);font-family:var(--ff);color:var(--text);font-size:13px;line-height:1.5}
+a{text-decoration:none;color:inherit}
+.shell{display:flex;min-height:100vh}
+.sidebar{width:220px;min-width:220px;background:var(--nav);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.logo-area{padding:18px 20px 16px;border-bottom:1px solid #222}
+.logo-area img{height:24px;display:block;filter:brightness(0) invert(1)}
+.nav-group{padding:16px 12px 4px;font-size:10px;font-weight:700;letter-spacing:.12em;color:#444;text-transform:uppercase}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 12px;margin:1px 8px;border-radius:6px;color:#9a9a9a;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;border:none;background:none;width:calc(100% - 16px);text-align:left}
+.nav-item:hover{background:#1a1a1a;color:#ddd}
+.nav-item.active{background:#fff !important;color:#111 !important}
+.nav-item.active svg{opacity:1}
+.nav-item.active .nav-tag{background:var(--red);color:#fff}
+.nav-item svg{width:14px;height:14px;flex-shrink:0;opacity:.5;transition:opacity .15s}
+.nav-item:hover svg{opacity:.8}
+.nav-tag{font-size:9px;font-weight:800;padding:1px 6px;background:var(--red);color:#fff;border-radius:3px;margin-left:auto;flex-shrink:0}
+.nav-tag.green{background:#166534}
+.nav-tag.amber{background:#b45309}
+.sidebar-footer{margin-top:auto;padding:14px;border-top:1px solid #1f1f1f}
+.user-chip{display:flex;align-items:center;gap:9px;padding:9px 10px;background:#1a1a1a;border-radius:6px}
+.user-av{width:28px;height:28px;border-radius:5px;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+.user-name{font-size:12px;font-weight:700;color:#ddd}
+.user-role{font-size:10px;color:#555;margin-top:1px}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;height:54px;gap:14px;position:sticky;top:0;z-index:20;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.topbar-title{font-size:15px;font-weight:800;color:var(--text);flex:1;letter-spacing:-.3px}
+.topbar-meta{font-size:11px;color:var(--text3);font-weight:600}
+.topbar-pill{font-size:10px;font-weight:700;letter-spacing:.06em;padding:4px 10px;border-radius:20px;background:var(--green-light);color:var(--green);border:1px solid var(--green-border);text-transform:uppercase}
+.hero-strip{display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border-bottom:2px solid var(--border)}
+.hero-kpi{padding:20px 22px;border-right:1px solid var(--border);position:relative}
+.hero-kpi:last-child{border-right:none}
+.hk-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+.hk-value{font-family:var(--mono);font-size:30px;font-weight:600;line-height:1;color:var(--text);letter-spacing:-.02em}
+.hk-value.good{color:var(--green)}.hk-value.amber{color:var(--amber)}.hk-value.danger{color:var(--red)}
+.hk-sub{font-size:11px;color:var(--text3);margin-top:5px;font-weight:600}
+.hk-bar{position:absolute;bottom:0;left:0;right:0;height:3px}
+.hk-bar.red{background:var(--red)}.hk-bar.green{background:#16a34a}.hk-bar.amber{background:#d97706}.hk-bar.blue{background:#0a66c2}
+.sec-band{background:var(--surface2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:10px 28px;display:flex;align-items:center;gap:10px;margin-top:8px}
+.sec-num{width:22px;height:22px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0}
+.sec-title{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text);flex:1}
+.sec-pill{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+.inner{padding:18px 28px 6px}
+.mg4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.mg3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.mc{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 16px;border-top:3px solid var(--border-dark)}
+.mc.accent{border-top-color:var(--red)}.mc.green{border-top-color:var(--green)}.mc.amber{border-top-color:var(--amber)}.mc.blue{border-top-color:#0a66c2}
+.mc-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:8px}
+.mc-value{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--text);line-height:1}
+.mc-sub{font-size:11px;color:var(--text3);margin-top:5px;font-weight:600}
+.panel{background:#fff;border:1px solid var(--border);border-radius:8px;padding:18px;margin-bottom:14px}
+.panel.flag-red{border-left:4px solid var(--red)}.panel.flag-amber{border-left:4px solid #d97706}.panel.flag-green{border-left:4px solid #16a34a}.panel.flag-blue{border-left:4px solid #0a66c2}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.three-col{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:14px;margin-bottom:14px}
+.panel-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.panel-title{font-size:13px;font-weight:800;color:var(--text);letter-spacing:-.2px}
+.panel-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:10px}
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{padding:8px 12px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);border-bottom:2px solid var(--border);background:var(--surface2)}
+.tbl td{padding:9px 12px;color:var(--text2);border-bottom:1px solid var(--border);vertical-align:middle;line-height:1.4}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#fafaf9}
+.tbl td.em{color:var(--text);font-weight:700}
+.b{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap;display:inline-block;letter-spacing:.03em}
+.b-red{background:var(--red-light);color:var(--red);border:1px solid var(--red-border)}
+.b-green{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
+.b-amber{background:var(--amber-light);color:var(--amber);border:1px solid var(--amber-border)}
+.b-blue{background:var(--blue-light);color:var(--blue);border:1px solid var(--blue-border)}
+.b-gray{background:#f5f5f3;color:#666;border:1px solid var(--border-dark)}
+.b-dark{background:#111;color:#fff}
+.b-hot{background:var(--red);color:#fff}
+.b-warm{background:#d97706;color:#fff}
+.b-watch{background:#999;color:#fff}
+.b-closed{background:var(--green-light);color:var(--green);border:1px solid var(--green-border)}
+.b-li{background:#0a66c2;color:#fff}
+.b-new{background:#7c3aed;color:#fff}
+.sr{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+.sr:last-child{border-bottom:none}
+.sr-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;margin-top:1px}
+.s-done{background:var(--green-light);color:var(--green)}.s-warn{background:var(--amber-light);color:var(--amber)}.s-crit{background:var(--red-light);color:var(--red)}
+.sr-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px}
+.sr-sub{font-size:11px;color:var(--text3);line-height:1.6}
+.br{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
+.br:last-child{border-bottom:none}
+.br-lbl{font-size:11px;color:var(--text2);width:190px;flex-shrink:0;font-weight:600;line-height:1.4}
+.br-track{flex:1;background:#eee;border-radius:3px;height:7px;overflow:hidden}
+.br-fill{height:7px;border-radius:3px}
+.br-val{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--text);width:42px;text-align:right;flex-shrink:0}
+.ga4-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);font-size:12px}
+.ga4-row:last-child{border-bottom:none}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot-live{background:#16a34a}.dot-warn{background:#d97706}
+.ga4-name{font-weight:600;color:var(--text)}
+.ga4-id{font-family:var(--mono);font-size:10px;color:var(--text3);margin-left:auto}
+.ikv{padding:8px 0;border-bottom:1px solid var(--border);font-size:12px;line-height:1.7;color:var(--text2)}
+.ikv:last-child{border-bottom:none}
+.ikv strong{font-weight:800;color:var(--text)}
+.chart-wrap{position:relative;width:100%;height:180px;margin-top:8px}
+.chart-wrap.sm{height:145px}
+.chart-wrap.lg{height:220px}
+.qcats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px}
+.qcat{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center}
+.qcat-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:6px}
+.qcat-pts{font-family:var(--mono);font-size:22px;font-weight:600;color:var(--text)}
+.grade-pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.gp{font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;border:1px solid}
+.gp-a{background:var(--green-light);color:var(--green);border-color:var(--green-border)}
+.gp-b{background:var(--blue-light);color:var(--blue);border-color:var(--blue-border)}
+.gp-c{background:var(--amber-light);color:var(--amber);border-color:var(--amber-border)}
+.gp-d{background:var(--red-light);color:var(--red);border-color:var(--red-border)}
+.alert{border-radius:7px;padding:11px 14px;font-size:12px;line-height:1.7;font-weight:600;margin-bottom:14px}
+.alert-red{background:var(--red-light);border:1px solid var(--red-border);color:var(--red)}
+.alert-green{background:var(--green-light);border:1px solid var(--green-border);color:var(--green)}
+.alert-amber{background:var(--amber-light);border:1px solid var(--amber-border);color:var(--amber)}
+.alert-blue{background:var(--blue-light);border:1px solid var(--blue-border);color:var(--blue)}
+.leg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;font-size:11px;color:var(--text3);font-weight:600}
+.leg span{display:flex;align-items:center;gap:5px}
+.leg-sq{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+.cac-table{width:100%;font-size:12px}
+.cac-table tr{border-bottom:1px solid var(--border)}
+.cac-table tr:last-child{border-bottom:none}
+.cac-table td{padding:7px 0;color:var(--text2);font-weight:600}
+.cac-table td:last-child{text-align:right;font-family:var(--mono);font-weight:600;color:var(--text)}
+.team-card{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:12px}
+.tm-row{display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--border);font-size:11px}
+.tm-row:last-child{border-bottom:none}
+.tm-badge{font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;flex-shrink:0}
+.tm-super{background:#111;color:#fff}
+.tm-admin{background:var(--surface2);color:var(--text2);border:1px solid var(--border-dark)}
+.jira-bug{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.jira-bug:last-child{border-bottom:none}
+.jira-ticket{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--red);flex-shrink:0;width:72px}
+.jira-title{font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px}
+.jira-sub{font-size:11px;color:var(--text3);line-height:1.5}
+/* Creative cards */
+.creative-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
+.creative-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.creative-thumb{height:80px;display:flex;align-items:center;justify-content:center;padding:10px;position:relative}
+.creative-badge{position:absolute;top:6px;left:6px;background:rgba(255,255,255,.18);border-radius:3px;font-size:8px;font-weight:700;color:#fff;padding:2px 5px}
+.creative-headline{font-size:10px;font-weight:700;color:#fff;text-align:center;line-height:1.4}
+.creative-stats{padding:8px}
+.creative-camp{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);margin-bottom:5px}
+.creative-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
+.eng-panel{background:var(--surface2);border-radius:8px;padding:16px}
+.footer-band{background:var(--nav);padding:16px 28px;text-align:center;margin-top:8px}
+.footer-band p{font-size:11px;color:#555;line-height:2}
+.footer-band p span{color:var(--red);font-weight:700}
+@media(max-width:960px){.sidebar{display:none}.hero-strip,.mg4{grid-template-columns:repeat(2,1fr)}.two-col,.three-col{grid-template-columns:1fr}.qcats{grid-template-columns:repeat(3,1fr)}.creative-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<script>
+function navTo(id, btn) {
+  document.querySelectorAll('.nav-item').forEach(function(el){ el.classList.remove('active'); });
+  btn.classList.add('active');
+  var el = document.getElementById(id);
+  if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+}
+</script>
+</head>
+<body>
+<div class="shell">
+<div class="sidebar">
+  <div class="logo-area"><img src="https://duxre.com/hubfs/Duxre%20logo.svg" alt="Duxre"></div>
+  <div class="nav-group">Sections</div>
+  <button class="nav-item active" onclick="navTo('s1',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5z"/></svg>Sales Overview<span class="nav-tag">Live</span></button>
+  <button class="nav-item" onclick="navTo('s2',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07z"/></svg>GA4 Traffic</button>
+  <button class="nav-item" onclick="navTo('s3',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"/></svg>SEO</button>
+  <button class="nav-item" onclick="navTo('s4',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm.5 3h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1 0-1zm0 3h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1 0-1z"/></svg>Marketplace</button>
+  <button class="nav-item" onclick="navTo('s5',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm-5 4a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/></svg>Platform Intel</button>
+  <button class="nav-item" onclick="navTo('s6',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/></svg>Platform Health<span class="nav-tag amber">36 bugs</span></button>
+  <button class="nav-item" onclick="navTo('sece',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/></svg>Email Engine<span class="nav-tag" style="background:#7c3aed">BLKR</span></button>
+  <button class="nav-item" onclick="navTo('sout',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z"/></svg>Outreach</button>
+  <div class="nav-group">Paid Channels</div>
+  <button class="nav-item" onclick="navTo('sli',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg>LinkedIn Ads</button>
+  <button class="nav-item" onclick="navTo('sgads',this)"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/></svg>Google Ads<span class="nav-tag amber">Early</span></button>
+  <button class="nav-item" onclick="navTo('smeta',this)"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>Meta Ads<span class="nav-tag">Live</span></button>
+  <div class="nav-group">Period</div>
+  <div style="padding:6px 12px;margin:0 8px;font-size:11px;color:#555;font-weight:600">📅 April 2026 MTD</div>
+  <div class="sidebar-footer">
+    <div class="user-chip">
+      <div class="user-av">BF</div>
+      <div><div class="user-name">Bryan Forester</div><div class="user-role">VP Revenue Operations</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title">Revenue Operations — April 2026</div>
+    <span class="topbar-meta">MTD · Updated Apr 20, 2026</span>
+    <span class="topbar-pill">Live</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero-strip">
+    <div class="hero-kpi" style="border-top:3px solid #EE3135">
+      <div class="hk-label">Total Apex ARR</div>
+      <div class="hk-value" style="color:#EE3135">$65K</div>
+      <div class="hk-sub">7 teams · 22 users</div>
+      <div class="hk-bar" style="background:#EE3135"></div>
+    </div>
+    <div class="hero-kpi" style="border-top:3px solid #282828">
+      <div class="hk-label">New Ignites MTD</div>
+      <div class="hk-value" style="color:#282828">10</div>
+      <div class="hk-sub">April 2026 · 10 confirmed signups</div>
+      <div class="hk-bar" style="background:#282828"></div>
+    </div>
+    <div class="hero-kpi" style="border-top:3px solid #EE3135">
+      <div class="hk-label">Power Brokers</div>
+      <div class="hk-value" style="color:#EE3135">4 <span style="font-size:14px;color:#636466">/ 20</span></div>
+      <div class="hk-sub">
+        <div style="margin-top:4px;background:#BFBEBF;border-radius:4px;height:6px;width:100%"><div style="background:#EE3135;height:6px;border-radius:4px;width:20%"></div></div>
+        <span style="font-size:10px;color:#636466;margin-top:3px;display:block">Sean · Heyn · Getz · Malan</span>
+      </div>
+      <div class="hk-bar" style="background:#EE3135"></div>
+    </div>
+    <div class="hero-kpi" style="border-top:3px solid #282828">
+      <div class="hk-label">Active Listings</div>
+      <div class="hk-value" style="color:#282828">234 <span style="font-size:14px;color:#636466">/ 300</span></div>
+      <div class="hk-sub">
+        <div style="margin-top:4px;background:#BFBEBF;border-radius:4px;height:6px;width:100%"><div style="background:#282828;height:6px;border-radius:4px;width:78%"></div></div>
+        <span style="font-size:10px;color:#636466;margin-top:3px;display:block">78% to goal</span>
+      </div>
+      <div class="hk-bar" style="background:#282828"></div>
+    </div>
+    <div class="hero-kpi" style="border-top:3px solid #EE3135">
+      <div class="hk-label">Demos Booked MTD</div>
+      <div class="hk-value" style="color:#EE3135">10 <span style="font-size:14px;color:#636466">/ 20</span></div>
+      <div class="hk-sub">
+        <div style="margin-top:4px;background:#BFBEBF;border-radius:4px;height:6px;width:100%"><div style="background:#EE3135;height:6px;border-radius:4px;width:50%"></div></div>
+        <span style="font-size:10px;color:#636466;margin-top:3px;display:block">50% to goal · April 2026</span>
+      </div>
+      <div class="hk-bar" style="background:#EE3135"></div>
+    </div>
+  </div>
+
+  <!-- S1: SALES -->
+  <div id="s1" class="sec-band">
+    <div class="sec-num">1</div><div class="sec-title">Sales Overview</div>
+    <span class="sec-pill b-gray">Apr 1–12 · HubSpot Live</span>
+  </div>
+  <div class="inner">
+
+
+
+    <div class="panel flag-red">
+      <div class="panel-hdr"><div class="panel-title">🎯 Priority Targets — April 2026</div><span class="b b-gray">HubSpot + Slack · Live · Apr 13</span></div>
+      <table class="tbl">
+        <thead><tr><th style="width:16%">Name</th><th style="width:20%">Company</th><th style="width:10%">Priority</th><th style="width:8%">Owner</th><th style="width:34%">Status / Next Action</th><th style="width:12%">Date</th></tr></thead>
+        <tbody>
+          <tr style="background:#fef6f6"><td class="em">Kevin Ramon</td><td>Texas Close'em</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#fde8e8;color:#EE3135;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#EE3135"><path d="M13 2L4.09 12.97H11L10 22L19.91 11.03H13L13 2Z"/></svg>Hot</span></td><td>Shermin</td><td>Microsite + Apex — 60% prob · close target Apr 30</td><td class="em" style="color:#EE3135">Apr 30</td></tr>
+          <tr style="background:#fef6f6"><td class="em">Joe Cesta</td><td>CBRE Capital Markets</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#fde8e8;color:#EE3135;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#EE3135"><path d="M13 2L4.09 12.97H11L10 22L19.91 11.03H13L13 2Z"/></svg>Hot</span></td><td>Shermin</td><td>Demo Apr 27 · BlackRock client · Sean invited</td><td class="em" style="color:#EE3135">Apr 27</td></tr>
+          <tr style="background:#fef6f6"><td class="em">Alex Bernaldo</td><td>Americas CRE</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#fde8e8;color:#EE3135;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#EE3135"><path d="M13 2L4.09 12.97H11L10 22L19.91 11.03H13L13 2Z"/></svg>Hot</span></td><td>Shermin</td><td>Demo Apr 22 · 10am EST · 50% prob</td><td class="em" style="color:#EE3135">Apr 22</td></tr>
+          <tr style="background:#fef6f6"><td class="em">Felipe Echarte</td><td>M&amp;M Fort Lauderdale</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#fde8e8;color:#EE3135;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#EE3135"><path d="M13 2L4.09 12.97H11L10 22L19.91 11.03H13L13 2Z"/></svg>Hot</span></td><td>Shermin</td><td>Demo Apr 23 · 6:00pm EST · 50% prob</td><td class="em" style="color:#EE3135">Apr 23</td></tr>
+          <tr style="background:#fef6f6"><td class="em">Austin Bull</td><td>Bull Realty Atlanta</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#fde8e8;color:#EE3135;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#EE3135"><path d="M13 2L4.09 12.97H11L10 22L19.91 11.03H13L13 2Z"/></svg>Hot</span></td><td>Shermin</td><td>Demo Apr 22 · 9:00am EST · 50% prob</td><td class="em" style="color:#EE3135">Apr 22</td></tr>
+          <tr style="background:#fef6f6"><td class="em">Brett Intrater</td><td>Cushman &amp; Wakefield</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#fde8e8;color:#EE3135;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#EE3135"><path d="M13 2L4.09 12.97H11L10 22L19.91 11.03H13L13 2Z"/></svg>Hot</span></td><td>Shermin</td><td>Demo No Show · 10% prob · May 31 · re-engage needed</td><td class="em" style="color:#EE3135">May 31</td></tr>
+          <tr style="background:#fafafa"><td class="em">Josh Blackledge</td><td>Gulf States Commercial</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#f0f0f0;color:#4C4C4E;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#4C4C4E"><circle cx="12" cy="12" r="6"/></svg>Warm</span></td><td>Shermin</td><td>Demo Apr 21 · 3:30pm CST · Marketing Manager joining</td><td class="em">Apr 21</td></tr>
+          <tr style="background:#fafafa"><td class="em">Jake Allen</td><td>Matthews</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#f0f0f0;color:#4C4C4E;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#4C4C4E"><circle cx="12" cy="12" r="6"/></svg>Warm</span></td><td>Shermin</td><td>Demo Apr 24 · 8:30am EST</td><td class="em">Apr 24</td></tr>
+          <tr style="background:#fafafa"><td class="em">Sam Aaron</td><td>CBRE</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#f0f0f0;color:#4C4C4E;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#4C4C4E"><circle cx="12" cy="12" r="6"/></svg>Warm</span></td><td>Shermin</td><td>Demo completed · partner discussion in progress</td><td class="em">Apr 13 ✓</td></tr>
+          <tr style="background:#fafafa"><td class="em">Jason Fefer</td><td>M&amp;M Los Angeles</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#f0f0f0;color:#4C4C4E;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#4C4C4E"><circle cx="12" cy="12" r="6"/></svg>Warm</span></td><td>Shermin</td><td>Demo completed · 30% prob · follow-up Jun 2</td><td class="em">Jun 2</td></tr>
+          <tr style="background:#fafafa"><td class="em">Antonio Diona</td><td>Matthews</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#f0f0f0;color:#4C4C4E;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#4C4C4E"><circle cx="12" cy="12" r="6"/></svg>Warm</span></td><td>Shermin</td><td>30% prob · follow-up Apr 24</td><td class="em">Apr 24</td></tr>
+          <tr style="background:#fafafa"><td class="em">Fabio Faerman</td><td>FA Commercial</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#f0f0f0;color:#4C4C4E;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#4C4C4E"><circle cx="12" cy="12" r="6"/></svg>Warm</span></td><td>Shermin</td><td>30% prob · follow-up Apr 22</td><td class="em">Apr 22</td></tr>
+          <tr style="background:#fafafa"><td class="em">Team Rodriguez</td><td>CBRE</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#f0f0f0;color:#4C4C4E;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#4C4C4E"><circle cx="12" cy="12" r="6"/></svg>Warm</span></td><td>Shermin</td><td>Listings review done · Rebill confirmed Apr 20 · website push this week</td><td class="em">Active</td></tr>
+          <tr style="background:#fafafa"><td class="em">Cole Neville</td><td>NAI Horizon</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#f0f0f0;color:#4C4C4E;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="#4C4C4E"><circle cx="12" cy="12" r="6"/></svg>Warm</span></td><td>Alina</td><td>Onboarding Apr 21</td><td class="em">Apr 21</td></tr>
+          <tr style="background:#f5f5f5"><td class="em">Shane Young</td><td>Young Lewin Advisors</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#282828;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Closed</span></td><td>Shermin</td><td>Ignite · $800M+ volume · Apex upsell target</td><td class="em">Apr 7</td></tr>
+          <tr style="background:#f5f5f5"><td class="em">Filip Niculete</td><td>Marcus &amp; Millichap</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#282828;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Closed</span></td><td>Alina</td><td>Ignite closed · 25 listings · Command upsell</td><td class="em">Onboarded</td></tr>
+          <tr style="background:#f5f5f5"><td class="em">Brant Yasaka</td><td>NAI CBI Hawaii</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#282828;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Closed</span></td><td>Shermin</td><td>Ignite activated · onboarding follow-up</td><td class="em">Activated</td></tr>
+          <tr style="background:#f5f5f5"><td class="em">Eitan Hakami</td><td>—</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#282828;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Closed</span></td><td>Shermin</td><td>Ignite activated · onboarding follow-up</td><td class="em">Activated</td></tr>
+          <tr style="background:#f5f5f5"><td class="em">Daniel Tour</td><td>Clearwood Partners</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#282828;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Closed</span></td><td>Alina</td><td>Ignite Free signup · onboarding needed</td><td class="em">Apr 20</td></tr>
+          <tr style="background:#f5f5f5"><td class="em">Andrew Naegele</td><td>—</td><td><span style="display:inline-flex;align-items:center;gap:4px;background:#282828;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.02em"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Closed</span></td><td>Alina</td><td>Ignite Free signup · onboarding needed</td><td class="em">Apr 20</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- LEAD SOURCE with fixed chart -->
+    <div class="panel">
+      <div class="panel-hdr">
+        <div class="panel-title">Lead Source Breakdown</div>
+        <span class="b" style="background:#282828;color:#fff">1,362 Contacts · Apr MTD</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px">
+        <div style="border:1px solid #e5e5e5;border-left:3px solid #EE3135;border-radius:6px;padding:12px 14px">
+          <div style="font-size:10px;font-weight:700;color:#636466;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">Smart List · Top Brokers 2026</div>
+          <div style="font-size:28px;font-weight:800;color:#EE3135;line-height:1">1,028</div>
+          <div style="margin-top:8px;background:#BFBEBF;border-radius:3px;height:4px"><div style="background:#EE3135;height:4px;border-radius:3px;width:75.5%"></div></div>
+          <div style="font-size:10px;color:#636466;margin-top:4px">75.5% of total contacts</div>
+        </div>
+        <div style="border:1px solid #e5e5e5;border-left:3px solid #EE3135;border-radius:6px;padding:12px 14px">
+          <div style="font-size:10px;font-weight:700;color:#636466;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">C&amp;W Canada Scout · +245 this month</div>
+          <div style="font-size:28px;font-weight:800;color:#EE3135;line-height:1">291</div>
+          <div style="margin-top:8px;background:#BFBEBF;border-radius:3px;height:4px"><div style="background:#EE3135;height:4px;border-radius:3px;width:21.4%"></div></div>
+          <div style="font-size:10px;color:#636466;margin-top:4px">21.4% of total contacts</div>
+        </div>
+        <div style="border:1px solid #e5e5e5;border-left:3px solid #282828;border-radius:6px;padding:12px 14px">
+          <div style="font-size:10px;font-weight:700;color:#636466;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">CBRE Executive Tier · Apr 5</div>
+          <div style="font-size:28px;font-weight:800;color:#282828;line-height:1">17</div>
+          <div style="margin-top:8px;background:#BFBEBF;border-radius:3px;height:4px"><div style="background:#282828;height:4px;border-radius:3px;width:1.2%"></div></div>
+          <div style="font-size:10px;color:#636466;margin-top:4px">1.2% of total contacts</div>
+        </div>
+        <div style="border:1px solid #e5e5e5;border-left:3px solid #282828;border-radius:6px;padding:12px 14px">
+          <div style="font-size:10px;font-weight:700;color:#636466;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">CBRE West Coast Expansion · Apr 8</div>
+          <div style="font-size:28px;font-weight:800;color:#282828;line-height:1">15</div>
+          <div style="margin-top:8px;background:#BFBEBF;border-radius:3px;height:4px"><div style="background:#282828;height:4px;border-radius:3px;width:1.1%"></div></div>
+          <div style="font-size:10px;color:#636466;margin-top:4px">1.1% of total contacts</div>
+        </div>
+        <div style="border:1px solid #e5e5e5;border-left:3px solid #4C4C4E;border-radius:6px;padding:12px 14px">
+          <div style="font-size:10px;font-weight:700;color:#636466;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">Organic Ignite Signups</div>
+          <div style="font-size:28px;font-weight:800;color:#4C4C4E;line-height:1">6</div>
+          <div style="margin-top:8px;background:#BFBEBF;border-radius:3px;height:4px"><div style="background:#4C4C4E;height:4px;border-radius:3px;width:0.4%"></div></div>
+          <div style="font-size:10px;color:#636466;margin-top:4px">0.4% of total contacts</div>
+        </div>
+        <div style="border:1px solid #e5e5e5;border-left:3px solid #BFBEBF;border-radius:6px;padding:12px 14px">
+          <div style="font-size:10px;font-weight:700;color:#636466;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">Other / Direct Adds</div>
+          <div style="font-size:28px;font-weight:800;color:#636466;line-height:1">5</div>
+          <div style="margin-top:8px;background:#BFBEBF;border-radius:3px;height:4px"><div style="background:#BFBEBF;height:4px;border-radius:3px;width:0.4%"></div></div>
+          <div style="font-size:10px;color:#636466;margin-top:4px">0.4% of total contacts</div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #e5e5e5;padding-top:14px">
+        <div style="font-size:10px;font-weight:700;color:#636466;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">Top Companies Added</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          <div style="background:#fde8e8;border-radius:6px;padding:10px 12px;text-align:center"><div style="font-size:20px;font-weight:800;color:#EE3135">~18</div><div style="font-size:11px;color:#636466;margin-top:2px;font-weight:600">Cushman &amp; Wakefield</div></div>
+          <div style="background:#fde8e8;border-radius:6px;padding:10px 12px;text-align:center"><div style="font-size:20px;font-weight:800;color:#EE3135">~14</div><div style="font-size:11px;color:#636466;margin-top:2px;font-weight:600">CBRE</div></div>
+          <div style="background:#f0f0f0;border-radius:6px;padding:10px 12px;text-align:center"><div style="font-size:20px;font-weight:800;color:#282828">~10</div><div style="font-size:11px;color:#636466;margin-top:2px;font-weight:600">Colliers</div></div>
+          <div style="background:#f0f0f0;border-radius:6px;padding:10px 12px;text-align:center"><div style="font-size:20px;font-weight:800;color:#282828">~4</div><div style="font-size:11px;color:#636466;margin-top:2px;font-weight:600">Marcus &amp; Millichap</div></div>
+        </div>
+      </div>
+    </div>
+
+  <!-- S2: GA4 -->
+  <div id="s2" class="sec-band">
+    <div class="sec-num">2</div><div class="sec-title">GA4 Traffic &amp; Analytics</div>
+    <span class="sec-pill b-green">Live · Apr 1–20 · duxre.com</span>
+  </div>
+  <div class="inner">
+    <div class="mg4">
+      <div class="mc" style="border-top-color:#EE3135">
+        <div class="mc-label">Total Sessions</div>
+        <div class="mc-value" style="color:#EE3135">3,872</div>
+        <div class="mc-sub">2,800 users · Apr 1–20 2026</div>
+      </div>
+      <div class="mc" style="border-top-color:#282828">
+        <div class="mc-label">LinkedIn Sessions</div>
+        <div class="mc-value" style="color:#282828">1,100</div>
+        <div class="mc-sub">#1 paid channel · Paid Social + LinkedIn ads</div>
+      </div>
+      <div class="mc" style="border-top-color:#EE3135">
+        <div class="mc-label">Organic Search</div>
+        <div class="mc-value good" style="color:#EE3135">116</div>
+        <div class="mc-sub">↑ 6x jump from 18 · SSR + SEO fixes working ✅</div>
+      </div>
+      <div class="mc" style="border-top-color:#4C4C4E">
+        <div class="mc-label">Direct Sessions</div>
+        <div class="mc-value" style="color:#4C4C4E">1,116</div>
+        <div class="mc-sub">#1 overall channel · strong brand awareness</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Sessions by Channel</div><span class="b" style="background:#282828;color:#fff">GA4 · Apr 1–20</span></div>
+        <div class="br"><div class="br-lbl">Direct</div><div class="br-track"><div class="br-fill" style="width:100%;background:#282828"></div></div><div class="br-val">1,116</div></div>
+        <div class="br"><div class="br-lbl">LinkedIn</div><div class="br-track"><div class="br-fill" style="width:98%;background:#EE3135"></div></div><div class="br-val">1,100</div></div>
+        <div class="br"><div class="br-lbl">Instantly / Cold Email</div><div class="br-track"><div class="br-fill" style="width:96%;background:#EE3135"></div></div><div class="br-val">1,069</div></div>
+        <div class="br"><div class="br-lbl">Paid Social</div><div class="br-track"><div class="br-fill" style="width:96%;background:#4C4C4E"></div></div><div class="br-val">1,067</div></div>
+        <div class="br"><div class="br-lbl">Email</div><div class="br-track"><div class="br-fill" style="width:65%;background:#4C4C4E"></div></div><div class="br-val">726</div></div>
+        <div class="br"><div class="br-lbl">Unassigned</div><div class="br-track"><div class="br-fill" style="width:28%;background:#BFBEBF"></div></div><div class="br-val">309</div></div>
+        <div class="br"><div class="br-lbl">Referral</div><div class="br-track"><div class="br-fill" style="width:20%;background:#636466"></div></div><div class="br-val">224</div></div>
+        <div class="br"><div class="br-lbl">Paid Search</div><div class="br-track"><div class="br-fill" style="width:13%;background:#636466"></div></div><div class="br-val">146</div></div>
+        <div class="br"><div class="br-lbl">Organic Search</div><div class="br-track"><div class="br-fill" style="width:10%;background:#EE3135"></div></div><div class="br-val">116 ↑6x</div></div>
+        <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:var(--text3)">Total Sessions: <strong style="color:var(--text)">3,872</strong> · Organic Search up 6x from 18 → 116 ✅</div>
+      </div>
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Active Users by City</div><span class="b" style="background:#4C4C4E;color:#fff">GA4 · Apr 1–20</span></div>
+        <div class="br"><div class="br-lbl">Ashburn, VA</div><div class="br-track"><div class="br-fill" style="width:100%;background:#282828"></div></div><div class="br-val">430</div></div>
+        <div class="br"><div class="br-lbl">Los Angeles, CA</div><div class="br-track"><div class="br-fill" style="width:31%;background:#EE3135"></div></div><div class="br-val">135</div></div>
+        <div class="br"><div class="br-lbl">Las Vegas, NV</div><div class="br-track"><div class="br-fill" style="width:13%;background:#4C4C4E"></div></div><div class="br-val">57</div></div>
+        <div class="br"><div class="br-lbl" style="color:var(--amber)">Mumbai ⚠️ non-ICP</div><div class="br-track"><div class="br-fill" style="width:13%;background:#BFBEBF"></div></div><div class="br-val">56</div></div>
+        <div class="br"><div class="br-lbl">New York, NY</div><div class="br-track"><div class="br-fill" style="width:13%;background:#636466"></div></div><div class="br-val">56</div></div>
+        <div class="br"><div class="br-lbl">Washington, DC</div><div class="br-track"><div class="br-fill" style="width:10%;background:#636466"></div></div><div class="br-val">42</div></div>
+        <div class="br"><div class="br-lbl">Hialeah Gardens, FL</div><div class="br-track"><div class="br-fill" style="width:9%;background:#BFBEBF"></div></div><div class="br-val">37</div></div>
+        <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:var(--text3)">Ashburn = AWS datacenter (bots/crawlers). LA strong — West Coast strategy working.</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Cohort Retention</div><span class="b" style="background:#4C4C4E;color:#fff">6 Weeks · Mar 1 – Apr 20</span></div>
+        <div class="br"><div class="br-lbl">Week 0 (acquisition)</div><div class="br-track"><div class="br-fill" style="width:100%;background:#282828"></div></div><div class="br-val">100%</div></div>
+        <div class="br"><div class="br-lbl">Week 1</div><div class="br-track"><div class="br-fill" style="width:4.5%;background:#EE3135"></div></div><div class="br-val">4.5%</div></div>
+        <div class="br"><div class="br-lbl">Week 2</div><div class="br-track"><div class="br-fill" style="width:2.6%;background:#EE3135"></div></div><div class="br-val">2.6%</div></div>
+        <div class="br"><div class="br-lbl">Week 3</div><div class="br-track"><div class="br-fill" style="width:1.8%;background:#BFBEBF"></div></div><div class="br-val">1.8%</div></div>
+        <div class="br"><div class="br-lbl">Week 4</div><div class="br-track"><div class="br-fill" style="width:0.5%;background:#BFBEBF"></div></div><div class="br-val">0.0%</div></div>
+        <div class="br"><div class="br-lbl">Week 5</div><div class="br-track"><div class="br-fill" style="width:0.5%;background:#BFBEBF"></div></div><div class="br-val">0.0%</div></div>
+        <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:#636466;line-height:1.8">95.5% of users don't return after Week 1. Re-engagement email sequences and onboarding nudges needed to close this gap.</div>
+      </div>
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">GA4 Properties — All Live</div><span class="b" style="background:#282828;color:#fff">Tracking Active</span></div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #e5e5e5;border-left:3px solid #EE3135;border-radius:5px">
+            <div style="width:7px;height:7px;border-radius:50%;background:#EE3135;flex-shrink:0"></div>
+            <div><div style="font-size:11px;font-weight:700;color:#282828">duxre.com</div><div style="font-size:10px;color:#636466">G-VEDY2SHVE7</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #e5e5e5;border-left:3px solid #EE3135;border-radius:5px">
+            <div style="width:7px;height:7px;border-radius:50%;background:#EE3135;flex-shrink:0"></div>
+            <div><div style="font-size:11px;font-weight:700;color:#282828">marketplace.duxre.com</div><div style="font-size:10px;color:#636466">G-BF8LVFR83B</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #e5e5e5;border-left:3px solid #282828;border-radius:5px">
+            <div style="width:7px;height:7px;border-radius:50%;background:#282828;flex-shrink:0"></div>
+            <div><div style="font-size:11px;font-weight:700;color:#282828">Malan &amp; Marcello</div><div style="font-size:10px;color:#636466">G-LB28C1WBJM</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #e5e5e5;border-left:3px solid #282828;border-radius:5px">
+            <div style="width:7px;height:7px;border-radius:50%;background:#282828;flex-shrink:0"></div>
+            <div><div style="font-size:11px;font-weight:700;color:#282828">Getz / CBRE</div><div style="font-size:10px;color:#636466">G-PGNT1LFTYZ</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #e5e5e5;border-left:3px solid #282828;border-radius:5px">
+            <div style="width:7px;height:7px;border-radius:50%;background:#282828;flex-shrink:0"></div>
+            <div><div style="font-size:11px;font-weight:700;color:#282828">Jon England / NAI</div><div style="font-size:10px;color:#636466">G-J20JMXJ7LH</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #e5e5e5;border-left:3px solid #282828;border-radius:5px">
+            <div style="width:7px;height:7px;border-radius:50%;background:#282828;flex-shrink:0"></div>
+            <div><div style="font-size:11px;font-weight:700;color:#282828">Colliers Western Region</div><div style="font-size:10px;color:#636466">G-9YEQ2Y8Z5S</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid #e5e5e5;border-left:3px solid #BFBEBF;border-radius:5px;grid-column:span 2">
+            <div style="width:7px;height:7px;border-radius:50%;background:#BFBEBF;flex-shrink:0"></div>
+            <div><div style="font-size:11px;color:#636466">Matthews &amp; Heyn — install pending</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="s3" class="sec-band">
+    <div class="sec-num">3</div><div class="sec-title">SEO</div>
+    <span class="sec-pill b-green">Live · Apr 21 2026</span>
+  </div>
+  <div class="inner">
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-label" style="margin-bottom:12px;color:#282828;font-weight:700">✅ Completed</div>
+        <div class="sr"><span class="sr-icon s-done" style="background:#EE3135;color:#fff">✓</span><div><div class="sr-title">SSR Phase 1 — Live ✅ <span class="b" style="background:#EE3135;color:#fff">Apr 21</span></div><div class="sr-sub">DTM-5635 · Rendertron live · noindex removed · crawl wall down · GSC URL Inspection passing on leasing + for sale routes · 234 listings now visible to Googlebot</div></div></div>
+        <div class="sr"><span class="sr-icon s-done" style="background:#282828;color:#fff">✓</span><div><div class="sr-title">DMARC — p=reject ✅</div><div class="sr-sub">Updated from p=none · Bijal's fix confirmed passing · Full DMARC enforcement active</div></div></div>
+        <div class="sr"><span class="sr-icon s-done" style="background:#282828;color:#fff">✓</span><div><div class="sr-title">Schema.org JSON-LD — deployed</div><div class="sr-sub">RealEstateListing structured data live on duxre.com</div></div></div>
+        <div class="sr"><span class="sr-icon s-done" style="background:#282828;color:#fff">✓</span><div><div class="sr-title">Open Graph + Twitter/X Card — deployed</div><div class="sr-sub">Links preview correctly on X, LinkedIn, Slack, Facebook</div></div></div>
+        <div class="sr"><span class="sr-icon s-done" style="background:#282828;color:#fff">✓</span><div><div class="sr-title">Canonical tags, H1/H2, 404s — fixed</div><div class="sr-sub">All resolved at HubSpot template level</div></div></div>
+        <div class="sr"><span class="sr-icon s-done" style="background:#282828;color:#fff">✓</span><div><div class="sr-title">UTM attribution — all channels confirmed</div><div class="sr-sub">Facebook, LinkedIn, Instagram, Bing, Teams all tracking</div></div></div>
+        <div class="sr"><span class="sr-icon s-done" style="background:#282828;color:#fff">✓</span><div><div class="sr-title">Organic Search 18 → 116 ✅ 6x jump</div><div class="sr-sub">duxre.com SEO fixes driving results · Schema, OG, canonical all contributing</div></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-label" style="margin-bottom:12px;color:#282828;font-weight:700">⏳ Pending / In Progress</div>
+        <div class="sr"><span class="sr-icon s-warn" style="background:#EE3135;color:#fff">!</span><div><div class="sr-title">XML Sitemap + robots.txt <span class="b" style="background:#EE3135;color:#fff">DTM-5808</span></div><div class="sr-sub">Dhruv Patel · Open · robots.txt currently 404 · Sitemap to marketplace.duxre.com/sitemap.xml · Bryan to submit to GSC once live · Auto-generated, includes all 234 live listings</div></div></div>
+        <div class="sr"><span class="sr-icon s-warn" style="background:#4C4C4E;color:#fff">!</span><div><div class="sr-title">SSR Phase 2 — Angular Universal <span class="b" style="background:#4C4C4E;color:#fff">DTM-5681</span></div><div class="sr-sub">Permanent fix · Prerequisite DTM-5635 now met ✅ · Angular Universal on listing routes only · Replaces Rendertron workaround · Assigned Dhruv Patel · Open</div></div></div>
+        <div class="sr"><span class="sr-icon s-warn" style="background:#4C4C4E;color:#fff">!</span><div><div class="sr-title">SPF — still ~all · needs -all</div><div class="sr-sub">Recommended update to -all for full alignment · Low risk change · Pending</div></div></div>
+        <div class="sr"><span class="sr-icon s-warn" style="background:#636466;color:#fff">!</span><div><div class="sr-title">Unique meta titles per listing</div><div class="sr-sub">All pages share generic tags · Now unblocked by SSR · Queued next</div></div></div>
+        <div class="sr"><span class="sr-icon s-warn" style="background:#636466;color:#fff">!</span><div><div class="sr-title">URL structure research <span class="b" style="background:#636466;color:#fff">DTM-5544</span></div><div class="sr-sub">Ana Markovic · Open · Competitive analysis vs Crexi/LoopNet · Awaiting Eric + Sean sign-off</div></div></div>
+        <div class="sr"><span class="sr-icon s-warn" style="background:#636466;color:#fff">!</span><div><div class="sr-title">New ranking pages — in progress</div><div class="sr-sub">Targeting CRE-specific terms · Content clusters + pillar pages · GEO strategy in planning</div></div></div>
+      </div>
+    </div>
+  </div>
+
+    <!-- S4: MARKETPLACE -->
+  <div id="s4" class="sec-band">
+    <div class="sec-num">4</div><div class="sec-title">Marketplace &amp; Listings</div>
+  </div>
+  <div class="inner">
+    <div class="mg4">
+      <div class="mc accent"><div class="mc-label">Active Listings</div><div class="mc-value">215</div><div class="mc-sub">Growing · audit in progress</div></div>
+      <div class="mc accent"><div class="mc-label">For Sale</div><div class="mc-value">152+</div><div class="mc-sub">Updating daily</div></div>
+      <div class="mc accent"><div class="mc-label">For Lease</div><div class="mc-value">71+</div><div class="mc-sub">Updating daily</div></div>
+      <div class="mc accent"><div class="mc-label">New Ignites — Apr MTD</div><div class="mc-value">7</div><div class="mc-sub">Pavich · Lopez · Young · Shields · Ramos · Hakami · Yasaka</div></div>
+    </div>
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Listing Mix — For Sale vs Lease</div></div>
+        <div class="leg"><span><span class="leg-sq" style="background:#222"></span>For Sale (152)</span><span><span class="leg-sq" style="background:#EE3135"></span>For Lease (71)</span></div>
+        <div class="chart-wrap sm"><canvas id="mixChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Platform Growth</div></div>
+        <div class="br"><div class="br-lbl">Active listings (213+)</div><div class="br-track"><div class="br-fill" style="width:100%;background:var(--red)"></div></div><div class="br-val">+184%</div></div>
+        <div class="br"><div class="br-lbl">Accounts (109+ growing)</div><div class="br-track"><div class="br-fill" style="width:99%;background:var(--red)"></div></div><div class="br-val">+187%</div></div>
+        <div class="br"><div class="br-lbl">Apex accounts</div><div class="br-track"><div class="br-fill" style="width:22%;background:#888"></div></div><div class="br-val">7</div></div>
+        <div class="br"><div class="br-lbl">Apex users (seats)</div><div class="br-track"><div class="br-fill" style="width:14%;background:#888"></div></div><div class="br-val">22</div></div>
+        <div class="br"><div class="br-lbl">Ignite active accounts</div><div class="br-track"><div class="br-fill" style="width:95%;background:#bbb"></div></div><div class="br-val">102+</div></div>
+      </div>
+    </div>
+    <div class="panel" style="margin-bottom:14px">
+        <div class="panel-hdr"><div class="panel-title">Most-Viewed Listings — 30 Days</div><span class="b" style="background:#282828;color:#fff">Mixpanel · Apr 20 · Live</span></div>
+        <table class="tbl"><thead><tr><th>Listing</th><th style="text-align:right">Views</th></tr></thead><tbody>
+          <tr><td class="em">Cornerstone at Cottonwood Corporate Center</td><td style="text-align:right;font-family:var(--mono);font-weight:600">96</td></tr>
+          <tr><td class="em">EY Plaza</td><td style="text-align:right;font-family:var(--mono);font-weight:600">72</td></tr>
+          <tr><td class="em">CalEdison Building</td><td style="text-align:right;font-family:var(--mono);font-weight:600">66</td></tr>
+          <tr><td class="em">4123 Lankershim Blvd</td><td style="text-align:right;font-family:var(--mono);font-weight:600">62</td></tr>
+          <tr><td class="em">999 Third Ave (11.3% Interest)</td><td style="text-align:right;font-family:var(--mono);font-weight:600">53</td></tr>
+          <tr><td class="em">Desert Oaks Plaza Outparcel</td><td style="text-align:right;font-family:var(--mono);font-weight:600">48</td></tr>
+          <tr><td class="em">8th Street &amp; Grand Blvd, Kansas City</td><td style="text-align:right;font-family:var(--mono);font-weight:600">38</td></tr>
+          <tr><td class="em">Topaz Tower</td><td style="text-align:right;font-family:var(--mono);font-weight:600">34</td></tr>
+          <tr><td class="em">Campus56</td><td style="text-align:right;font-family:var(--mono);font-weight:600">31</td></tr>
+          <tr><td class="em">Fourth &amp; Blanchard</td><td style="text-align:right;font-family:var(--mono);font-weight:600">23</td></tr>
+          <tr><td class="em">1515 Orangewood</td><td style="text-align:right;font-family:var(--mono);font-weight:600">26</td></tr>
+          <tr><td class="em">Bank of America Plaza</td><td style="text-align:right;font-family:var(--mono);font-weight:600">22</td></tr>
+        </tbody></table>
+        <div style="font-size:11px;color:var(--text3);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">1,076 total listing detail views across 130+ listings · 30d · Source: Mixpanel</div>
+      </div>
+    <div class="panel">
+      <div class="panel-hdr"><div class="panel-title">Listing Quality Program</div><span class="b b-amber">Active · Daily</span></div>
+      <div class="qcats">
+        <div class="qcat"><div class="qcat-lbl">A — Description</div><div class="qcat-pts">30 pts</div></div>
+        <div class="qcat"><div class="qcat-lbl">B — Image Quality</div><div class="qcat-pts">30 pts</div></div>
+        <div class="qcat"><div class="qcat-lbl">C — Property Data</div><div class="qcat-pts">20 pts</div></div>
+        <div class="qcat"><div class="qcat-lbl">D — OM Attached</div><div class="qcat-pts">15 pts</div></div>
+        <div class="qcat"><div class="qcat-lbl">E — Freshness</div><div class="qcat-pts">5 pts</div></div>
+      </div>
+      <div class="grade-pills">
+        <span class="gp gp-a">A · 90–100 · Publish as-is</span>
+        <span class="gp gp-b">B · 75–89 · Minor fixes</span>
+        <span class="gp gp-c">C · 55–74 · Needs work</span>
+        <span class="gp gp-d">D · 0–54 · Return to Alina</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- S5: REVENUE INTEL -->
+  <div id="s5" class="sec-band">
+    <div class="sec-num">5</div><div class="sec-title">Platform Intelligence</div>
+  </div>
+  <div class="inner">
+    <div class="mg4">
+      <div class="mc" style="border-top-color:#EE3135"><div class="mc-label">Broker Logins — 30d</div><div class="mc-value">1,711</div><div class="mc-sub">Total all: 1,584 · Mixpanel live · Apr 12</div></div>
+      <div class="mc" style="border-top-color:#EE3135"><div class="mc-label">Listing Detail Views — 30d</div><div class="mc-value">905</div><div class="mc-sub">826 page views · 274 contact views</div></div>
+      <div class="mc accent"><div class="mc-label">Active Subscriptions</div><div class="mc-value">104</div><div class="mc-sub">Ignite (104 lines) · Apex 7 teams · Stripe live</div></div>
+      <div class="mc accent"><div class="mc-label">CAC (Apr MTD)</div><div class="mc-value">$160</div><div class="mc-sub">$640.19 ÷ 4 closes · LinkedIn-only</div></div>
+    </div>
+
+    <!-- PLATFORM ENGAGEMENT — polished -->
+    <!-- BROKER VIEW -->
+    <div class="panel" style="margin-bottom:10px">
+      <div class="panel-hdr"><div class="panel-title">🟢 Real Broker Activity — 30 Days</div><span class="b" style="background:#282828;color:#fff">Mixpanel · Live · Apr 12</span></div>
+      <div class="two-col" style="margin-bottom:0">
+        <div>
+          <p class="panel-label">Daily logins — all platforms stacked (Apr 1–9)</p>
+          <div class="chart-wrap lg"><canvas id="loginChart"></canvas></div>
+          <div class="leg" style="margin-top:10px;justify-content:center">
+            <span><span class="leg-sq" style="background:#EE3135"></span>Dashboard</span>
+            <span><span class="leg-sq" style="background:#555"></span>Microsite</span>
+            <span><span class="leg-sq" style="background:#aaa"></span>Marketplace</span>
+          </div>
+        </div>
+        <div>
+          <p class="panel-label">Broker-only login totals — 30 days</p>
+          <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px">
+            <div style="position:relative;width:120px;height:120px;flex-shrink:0"><canvas id="platformChart"></canvas></div>
+            <div style="flex:1">
+              <div class="br"><div class="br-lbl" style="width:110px">Dashboard</div><div class="br-track"><div class="br-fill" style="width:100%;background:#EE3135"></div></div><div class="br-val">753</div></div>
+              <div class="br"><div class="br-lbl" style="width:110px">Microsite</div><div class="br-track"><div class="br-fill" style="width:56%;background:#555"></div></div><div class="br-val">474</div></div>
+              <div class="br"><div class="br-lbl" style="width:110px">Marketplace</div><div class="br-track"><div class="br-fill" style="width:47%;background:#aaa"></div></div><div class="br-val">395</div></div>
+            </div>
+          </div>
+          <p class="panel-label" style="margin-top:4px">Platform activity — 30 days</p>
+          <div class="br"><div class="br-lbl" style="width:150px">Listing detail views</div><div class="br-track"><div class="br-fill" style="width:100%;background:var(--red)"></div></div><div class="br-val">905</div></div>
+          <div class="br"><div class="br-lbl" style="width:150px">Listing page views</div><div class="br-track"><div class="br-fill" style="width:91%;background:#EE3135"></div></div><div class="br-val">826</div></div>
+          <div class="br"><div class="br-lbl" style="width:150px">Contact detail views</div><div class="br-track"><div class="br-fill" style="width:30%;background:#888"></div></div><div class="br-val">274</div></div>
+          <p style="font-size:10px;color:var(--text3);margin-top:8px">* Microsite est. pending dev/staging token separation. All @duxre.com + known test accounts removed from broker count.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERNAL VIEW -->
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-hdr"><div class="panel-title">🔵 Internal Team Activity — 30 Days</div><span style="display:inline-flex;align-items:center;gap:4px;background:#282828;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700">Onboarding · Ops · Dev · Mixpanel</span></div>
+      <div class="two-col" style="margin-bottom:0">
+        <div>
+          <p class="panel-label">Dashboard internal logins by account</p>
+          <div class="br"><div class="br-lbl">onboarding [at] duxre.com</div><div class="br-track"><div class="br-fill" style="width:100%;background:#282828"></div></div><div class="br-val">170</div></div>
+          <div class="br"><div class="br-lbl">sean [at] datatodeals.com</div><div class="br-track"><div class="br-fill" style="width:94%;background:#282828"></div></div><div class="br-val">159</div></div>
+          <div class="br"><div class="br-lbl">sales [at] duxre.com (shared onb. login)</div><div class="br-track"><div class="br-fill" style="width:48%;background:#4C4C4E"></div></div><div class="br-val">81</div></div>
+          <div class="br"><div class="br-lbl">sales_associate [at] duxre.com</div><div class="br-track"><div class="br-fill" style="width:30%;background:#636466"></div></div><div class="br-val">51</div></div>
+          <div class="br"><div class="br-lbl">melmore · vitaly · galya · dmitry</div><div class="br-track"><div class="br-fill" style="width:18%;background:#BFBEBF"></div></div><div class="br-val">31</div></div>
+          <div class="br"><div class="br-lbl">bforester · dhruv · sales_analyst</div><div class="br-track"><div class="br-fill" style="width:8%;background:#BFBEBF"></div></div><div class="br-val">13</div></div>
+          <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:var(--blue)">
+            <span>Dashboard Internal Total</span><span>505</span>
+          </div>
+        </div>
+        <div>
+          <p class="panel-label">Internal totals by platform</p>
+          <div class="br"><div class="br-lbl" style="width:140px">Dashboard Internal</div><div class="br-track"><div class="br-fill" style="width:100%;background:#282828"></div></div><div class="br-val">487</div></div>
+          <div class="br"><div class="br-lbl" style="width:140px">Marketplace Internal</div><div class="br-track"><div class="br-fill" style="width:30%;background:#4C4C4E"></div></div><div class="br-val">147</div></div>
+          <div class="br"><div class="br-lbl" style="width:140px">Microsite Internal + Dev</div><div class="br-track"><div class="br-fill" style="width:70%;background:#636466"></div></div><div class="br-val">~342</div></div>
+          <div style="margin-top:12px;background:var(--blue-light);border:1px solid var(--blue-border);border-radius:6px;padding:10px 12px;font-size:11px;color:var(--blue);line-height:1.8">
+            <strong>⚠️ Microsite dev pollution — cleanup in progress</strong><br>sharebot.net, xfavaj.com, dollicons.com test accounts still present. Miral Patel confirmed backfill of all production profiles complete Apr 12. Deletion ticket being created. Child site dev team (stanislav, polina, kostiantyn — marakas.digital) now visible post-backfill.
+          </div>
+          <div style="margin-top:10px;background:var(--amber-light);border:1px solid var(--amber-border);border-radius:6px;padding:10px 12px;font-size:11px;color:var(--amber);line-height:1.8">
+            <strong>⚠️ onboarding [at] duxre.com is a shared login</strong><br>Onboarding team using one login for backend Marketplace work. Individual credentials needed per team member for proper accountability.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APEX TEAMS -->
+    <div class="panel">
+      <div class="panel-hdr"><div class="panel-title">Apex Account Roster — 7 Teams · 22 Users</div><span class="b" style="background:#282828;color:#fff">Verified · CSV + HubSpot</span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+        <div class="team-card"><div style="font-size:11px;font-weight:800;color:var(--text);margin-bottom:2px">Colliers Western Region</div><div style="font-size:10px;color:var(--text3);margin-bottom:8px">Colliers · 6 members</div><div class="tm-row"><span class="tm-badge tm-super">Super Admin</span><span style="font-weight:600">Sean Fulp</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Vice Chair</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Jordan Garcia</span><span style="color:var(--text3);margin-left:auto;font-size:10px">AVP</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Mark Schuessler</span><span style="color:var(--text3);margin-left:auto;font-size:10px">EVP</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Blake Hammerstein</span><span style="color:var(--text3);margin-left:auto;font-size:10px">AVP</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Eric Longo</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Analyst</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Todd Tydlaska</span><span style="color:var(--text3);margin-left:auto;font-size:10px">EVP</span></div></div>
+        <div class="team-card"><div style="font-size:11px;font-weight:800;color:var(--text);margin-bottom:2px">Integrated Advisory Services</div><div style="font-size:10px;color:var(--text3);margin-bottom:8px">Colliers · 5 members</div><div class="tm-row"><span class="tm-badge tm-super">Super Admin</span><span style="font-weight:600">Matt Heyn</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Vice Chair</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Jaime Pickett</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Sr. Coordinator</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Ian Gilbert</span><span style="color:var(--text3);margin-left:auto;font-size:10px">EVP</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">David Solomon</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Sr. EVP</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Caitlin Hoffman</span><span style="color:var(--text3);margin-left:auto;font-size:10px">VP</span></div></div>
+        <div class="team-card"><div style="font-size:11px;font-weight:800;color:var(--text);margin-bottom:2px">Malan + Marcello Investment</div><div style="font-size:10px;color:var(--text3);margin-bottom:8px">Colliers · 5 members</div><div class="tm-row"><span class="tm-badge tm-super">Super Admin</span><span style="font-weight:600">Adam Malan</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Vice Chair</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Deana Marcello</span><span style="color:var(--text3);margin-left:auto;font-size:10px">EVP</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Monica Vanyo</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Sr. Strategist</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Trevor Olkowski</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Associate</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Areeba Moten</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Sr. Associate</span></div></div>
+        <div class="team-card"><div style="font-size:11px;font-weight:800;color:var(--text);margin-bottom:2px">Randy Getz | CBRE</div><div style="font-size:10px;color:var(--text3);margin-bottom:8px">CBRE · 2 members</div><div class="tm-row"><span class="tm-badge tm-super">Super Admin</span><span style="font-weight:600">Randy Getz</span><span style="color:var(--text3);margin-left:auto;font-size:10px">EVP</span></div><div class="tm-row"><span class="tm-badge tm-admin">Admin</span><span style="font-weight:600">Kai Neyer</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Client Svc.</span></div></div>
+        <div class="team-card"><div style="font-size:11px;font-weight:800;color:var(--text);margin-bottom:2px">Team England</div><div style="font-size:10px;color:var(--text3);margin-bottom:8px">NAI Heartland · 1 member</div><div class="tm-row"><span class="tm-badge tm-super">Super Admin</span><span style="font-weight:600">Jon England</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Partner</span></div></div>
+        <div class="team-card"><div style="font-size:11px;font-weight:800;color:var(--text);margin-bottom:2px">May Realty Advisors</div><div style="font-size:10px;color:var(--text3);margin-bottom:8px">May Realty · 1 member</div><div class="tm-row"><span class="tm-badge tm-super">Super Admin</span><span style="font-weight:600">Matthew May</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Owner/Broker</span></div><div style="background:var(--amber-light);border:1px solid var(--amber-border);border-radius:4px;padding:5px 8px;font-size:10px;color:var(--amber);font-weight:600;margin-top:8px">ARR: $12,000 · Confirmed paid</div></div>
+        <div class="team-card"><div style="font-size:11px;font-weight:800;color:var(--text);margin-bottom:2px">Pablo Rodriguez | CBRE</div><div style="font-size:10px;color:var(--text3);margin-bottom:8px">CBRE · 1 member (+ team TBD)</div><div class="tm-row"><span class="tm-badge tm-super">Super Admin</span><span style="font-weight:600">Pablo Rodriguez</span><span style="color:var(--text3);margin-left:auto;font-size:10px">Managing Dir.</span></div><div style="background:var(--amber-light);border:1px solid var(--amber-border);border-radius:4px;padding:5px 8px;font-size:10px;color:var(--amber);font-weight:600;margin-top:8px">ARR: $2,500 · Mar 2026 · team roster TBD</div></div>
+      </div>
+    </div>
+
+    <!-- TOP USERS + ONB -->
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Top Users by Engagement</div><span class="b" style="background:#282828;color:#fff">Live · Mixpanel · Apr 20</span></div>
+        <table class="tbl">
+          <thead><tr><th>Name</th><th>Company</th><th>Team</th><th>Tier</th><th>Dashboard</th><th>Mktplace</th><th>Total</th></tr></thead>
+          <tbody>
+            <tr><td class="em">Sean Fulp</td><td>Colliers</td><td style="font-size:11px">Colliers Western</td><td><span class="b b-dark">Apex</span></td><td style="font-family:var(--mono);font-weight:600">104</td><td style="font-family:var(--mono);font-weight:600">22</td><td style="font-family:var(--mono);font-weight:600;font-size:14px;color:var(--green)">126</td></tr>
+            <tr><td class="em">Eric Longo</td><td>Colliers</td><td style="font-size:11px">Colliers Western</td><td><span class="b b-dark">Apex</span></td><td style="font-family:var(--mono);font-weight:600">8</td><td style="font-family:var(--mono);font-weight:600">64</td><td style="font-family:var(--mono);font-weight:600;font-size:14px;color:var(--green)">72</td></tr>
+            <tr><td class="em">Blake Hammerstein</td><td>Colliers</td><td style="font-size:11px">Colliers Western</td><td><span class="b b-dark">Apex</span></td><td style="font-family:var(--mono);font-weight:600">31</td><td style="font-family:var(--mono);font-weight:600">1</td><td style="font-family:var(--mono);font-weight:600;font-size:14px">32</td></tr>
+            <tr><td class="em">Trevor Olkowski</td><td>Colliers</td><td style="font-size:11px">Malan + Marcello</td><td><span class="b b-dark">Apex</span></td><td style="font-family:var(--mono);font-weight:600">19</td><td style="font-family:var(--mono);font-weight:600">1</td><td style="font-family:var(--mono);font-weight:600;font-size:14px">20</td></tr>
+            <tr><td class="em">Monica Vanyo</td><td>Colliers</td><td style="font-size:11px">Malan + Marcello</td><td><span class="b b-dark">Apex</span></td><td style="font-family:var(--mono);font-weight:600">17</td><td style="font-family:var(--mono);font-weight:600">5</td><td style="font-family:var(--mono);font-weight:600;font-size:14px">22</td></tr>
+            <tr><td class="em">Vitaly Vinogradov</td><td>Duxre</td><td style="font-size:11px">Dev Team</td><td><span class="b b-dark">Internal</span></td><td style="font-family:var(--mono);font-weight:600">15</td><td style="font-family:var(--mono);font-weight:600">39</td><td style="font-family:var(--mono);font-weight:600;font-size:14px">54</td></tr>
+            <tr><td class="em">Kai Neyer</td><td>CBRE</td><td style="font-size:11px">Randy Getz</td><td><span class="b b-dark">Apex</span></td><td style="font-family:var(--mono);font-weight:600">10</td><td style="font-family:var(--mono);font-weight:600">5</td><td style="font-family:var(--mono);font-weight:600;font-size:14px">15</td></tr>
+            <tr><td class="em">Jon England</td><td>NAI Heartland</td><td style="font-size:11px">Team England</td><td><span class="b b-dark">Apex</span></td><td style="font-family:var(--mono);font-weight:600">7</td><td style="font-family:var(--mono);font-weight:600">0</td><td style="font-family:var(--mono);font-weight:600;font-size:14px">7</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel flag-amber">
+        <div class="panel-hdr"><div class="panel-title">ONB Queue + Active Watch</div><span class="b b-amber">Action Needed</span></div>
+        <table class="tbl">
+          <thead><tr><th>Name</th><th>Company</th><th>Status</th><th>Next</th></tr></thead>
+          <tbody>
+            <tr><td class="em">Shobhan Sheth</td><td>Sheth LLC</td><td><span class="b b-amber">ONB Scheduled</span></td><td class="em">Apr 13</td></tr>
+            <tr><td class="em">Cole Neville</td><td>NAI Horizon</td><td><span class="b b-amber">ONB Scheduled</span></td><td class="em">Apr 21</td></tr>
+            <tr><td class="em">Jeremy Thornton</td><td>Colliers</td><td><span class="b b-amber">Access Ready</span></td><td class="em">TBD</td></tr>
+            <tr><td class="em">Brant Yasaka</td><td>NAI CBI Hawaii</td><td><span class="b b-amber">Access Ready</span></td><td class="em">This week</td></tr>
+            <tr><td class="em">Jamison Shields</td><td>Colliers Portland</td><td><span class="b" style="background:#282828;color:#fff">Just Closed</span></td><td class="em">ONB TBD</td></tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Subscription Breakdown</div><span class="b" style="background:#282828;color:#fff">Stripe Live</span></div>
+        <div class="br"><div class="br-lbl">Ignite Free</div><div class="br-track"><div class="br-fill" style="width:100%;background:#ccc"></div></div><div class="br-val">104</div></div>
+        <div class="br"><div class="br-lbl">Apex accounts (7 teams)</div><div class="br-track"><div class="br-fill" style="width:10%;background:var(--red)"></div></div><div class="br-val">7</div></div>
+        <p style="font-size:11px;color:var(--text3);margin-top:10px">✅ Stripe verified Apr 12 — 100+ active lines.</p>
+      </div>
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Customer Acquisition Cost</div><span class="b b-gray">Apr MTD</span></div>
+        <div style="font-family:var(--mono);font-size:38px;font-weight:600;color:var(--text);line-height:1;margin-bottom:4px">$160.05</div>
+        <div style="font-size:11px;color:var(--text3);font-weight:600;margin-bottom:12px">LinkedIn-only · 4 Ignite closes · Meta paused</div>
+        <table class="cac-table">
+          <tr><td>LinkedIn spend (Apr MTD)</td><td>$1,445.96</td></tr>
+          <tr><td>Meta Ads</td><td style="color:var(--text3)">Paused</td></tr>
+          <tr><td>New customers (Apr MTD)</td><td>5</td></tr>
+          <tr><td>Revenue from closes</td><td style="color:var(--text3)">$0 (all Ignite free)</td></tr>
+          <tr><td>LinkedIn-only CAC</td><td style="color:var(--red)">$202.50</td></tr>
+        </table>
+        <p style="font-size:10px;color:var(--text3);margin-top:8px">Next Apex close (Kevin Ramon Apr 30 target) transforms this ratio. Filip Niculete and Shane Young are the two hottest Apex upsell candidates.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- S6: PLATFORM HEALTH -->
+  <div id="s6" class="sec-band">
+    <div class="sec-num" style="background:#636466">6</div>
+    <div class="sec-title">Platform Health &amp; Engineering</div>
+    <span class="sec-pill b-amber">36 Active Bugs · Jira Live</span>
+  </div>
+  <div class="inner">
+    <div class="alert alert-amber">⚠ <strong>Dash MVP — May 1 deadline.</strong> Sprint 1 ends Apr 12 · Sprint 2 Apr 13–27 · Demo Apr 27 · North star: Generation-to-Send ≥ 40%. Staging deployments on hold pending DTM-5615 QA clearance.</div>
+    <div class="two-col">
+      <div class="panel flag-red">
+        <div class="panel-hdr"><div class="panel-title">Active Production Bugs</div><span class="b b-red">Jira · Apr 20 · Live Pull</span></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DTM-5650" target="_blank" style="color:#EE3135;font-weight:800">DTM-5650</a></div><div><div class="jira-title">🚨 NEW — Registration Flow Critically Broken on Staging (DTM-5553 regression)</div><div class="jira-sub">Fix for "Other" account type caused full registration regression. Dhruv Patel · Ready For Deployment.</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DTM-5651" target="_blank" style="color:#EE3135;font-weight:800">DTM-5651</a></div><div><div class="jira-title">🚨 NEW — No registration confirmation emails sent for any account type</div><div class="jira-sub">Critical · Staging · Dhruv Patel · Ready For Deployment.</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DTM-5652" target="_blank" style="color:#EE3135;font-weight:800">DTM-5652</a></div><div><div class="jira-title">🚨 NEW — Occupier registration shows Investor fields in step 2</div><div class="jira-sub">Critical · Dhruv Patel · Ready For Deployment.</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1563" target="_blank" style="color:#EE3135;font-weight:800">DASH-1563</a></div><div><div class="jira-title">🚨 NEW — Property Intelligence Agent: address lookup broken <span style="background:#EE3135;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700">WED DEMO BLOCKER</span></div><div class="jira-sub">Critical · Mark Elmore · Dev Code Review · Must ship before Apr 22 Bernaldo demo</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1564" target="_blank" style="color:#EE3135;font-weight:800">DASH-1564</a></div><div><div class="jira-title">🚨 NEW — Company Intelligence Agent: company lookup broken <span style="background:#EE3135;color:#fff;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700">WED DEMO BLOCKER</span></div><div class="jira-sub">Critical · Mark Elmore · Dev Code Review · Must ship before Apr 22 Bernaldo demo</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1566" target="_blank" style="color:#EE3135;font-weight:800">DASH-1566</a></div><div><div class="jira-title">🚨 NEW — Tenant isolation: DASH conversation history visible across tenants after switch</div><div class="jira-sub">Critical · Unassigned · To Do · Security/privacy risk · tenant data leaking</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1562" target="_blank" style="color:#EE3135;font-weight:800">DASH-1562</a></div><div><div class="jira-title">🚨 NEW — Search returns irrelevant tenant listings (wrong tenant data shown)</div><div class="jira-sub">Critical · Mark Elmore · To Do</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1578" target="_blank" style="color:#EE3135;font-weight:800">DASH-1578</a></div><div><div class="jira-title">🚨 NEW — Dashboard Dash tiles: Property/Contact/Company agent routing not scoped</div><div class="jira-sub">Critical · Dennis Nguyen · To Do · Rich card vs prose output inconsistent</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1497" target="_blank" style="color:#EE3135;font-weight:800">DASH-1497</a></div><div><div class="jira-title">🆕 NEW — Frontend: Intelligence tab renders 5-section response</div><div class="jira-sub">Critical · Jovan Toskic · To Do</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1445" target="_blank" style="color:#EE3135;font-weight:800">DASH-1445</a></div><div><div class="jira-title">🚨 Company &amp; Property Intelligence agents not functioning on production</div><div class="jira-sub">Critical · Regression · Mark Elmore · To Do · Affects Colliers enterprise users</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1410" target="_blank" style="color:#EE3135;font-weight:800">DASH-1410</a></div><div><div class="jira-title">🚨 NEW — Contact Intelligence agent not functioning for Sean Fulp's contacts</div><div class="jira-sub">Critical · Mark Elmore · To Do</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1444" target="_blank" style="color:#EE3135;font-weight:800">DASH-1444</a></div><div><div class="jira-title">🚨 NEW — Contact Intelligence API endpoints for Marketplace frontend</div><div class="jira-sub">Critical · Ebenge Usip · <strong style="color:var(--green)">Ready for Staging ✅</strong> · Due Apr 22</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1443" target="_blank" style="color:#EE3135;font-weight:800">DASH-1443</a></div><div><div class="jira-title">🚨 NEW — Contact Intelligence dedicated route for Marketplace Intelligence tab</div><div class="jira-sub">Critical · Ebenge Usip · <strong style="color:var(--green)">Ready for Staging ✅</strong> · Due Apr 22</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DTM-5713" target="_blank" style="color:#EE3135;font-weight:800">DTM-5713</a></div><div><div class="jira-title">🚨 NEW — Listing Console slow to load · impacted Stone Point Capital demo</div><div class="jira-sub">Critical · <strong style="color:var(--green)">Ready For Deployment ✅</strong> · Dhruv Patel · Fixed fast after demo impact</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DTM-4920" target="_blank" style="color:#EE3135;font-weight:800">DTM-4920</a></div><div><div class="jira-title">🚨 NEW — Signup Anti-Fraud Gate: OTP + US/Canada Phone Validation</div><div class="jira-sub">Critical · Miral Patel · Open · Triggered by CalEdison listing fraud · OTP + NANP phone validation on signup</div></div></div>
+        <div class="jira-bug"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DTM-5644" target="_blank">DTM-5644</a></div><div><div class="jira-title">Security Incident — Azure DEV &amp; QA VMs</div><div class="jira-sub">In Progress · Mohit</div></div></div>
+        <div class="jira-bug"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1265" target="_blank">DASH-1265</a></div><div><div class="jira-title">Context poisoning — prior query results bleed into follow-up queries</div><div class="jira-sub">Critical · Staging QA · Mark Elmore — progressed from Dev Code Review ✅</div></div></div>
+        <div class="jira-bug"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DTM-5642" target="_blank">DTM-5642</a></div><div><div class="jira-title">CA Upload — PDF renders as unformatted block in marketplace modal</div><div class="jira-sub">Critical · Smoke Testing · Vitaly Vinogradov — progressed ✅</div></div></div>
+        <div class="jira-bug"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DASH-1195" target="_blank">DASH-1195</a></div><div><div class="jira-title">Broad listing queries return incorrect property type subset</div><div class="jira-sub">Critical · Failed QA · Mark Elmore</div></div></div>
+        <div class="jira-bug"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/DTM-5635" target="_blank">DTM-5635</a></div><div><div class="jira-title">Marketplace SSR — 213 listings invisible to Googlebot</div><div class="jira-sub">Critical · <strong style="color:var(--green)">In Progress ✅</strong> · Dhruv Patel — #1 SEO unlock</div></div></div>
+        <div style="padding:8px 0;font-size:11px;color:var(--text3);border-top:1px solid var(--border);margin-top:4px">+14 more open · DASH-1279, DASH-1272, DASH-1196, DTM-5494, DTM-5612, DTM-5323, DTM-5535, DTM-5322, DTM-5427, DTM-5605, DTM-5643, DASH-1265, DASH-1195, DTM-5644</div>
+      </div>
+      <div class="panel flag-amber">
+        <div class="panel-hdr"><div class="panel-title">Dash MVP — Sprint Status</div><span class="b b-amber">May 1 Deadline</span></div>
+        <div class="sr"><span class="sr-icon s-warn">1</span><div><div class="sr-title">Sprint 1 — Mar 30 to Apr 12 ✅ Complete</div><div class="sr-sub">Contact Intelligence, CA fixes, UI polish shipped. Registration regression (DTM-5650/5651/5652) discovered during QA — carry into Sprint 2.</div></div></div>
+        <div class="sr"><span class="sr-icon" style="background:#f0f0f0;color:#282828">2</span><div><div class="sr-title">Sprint 2 — Apr 13 to Apr 27</div><div class="sr-sub">Email canvas, QA pass, generation-to-send ratio build. DASH-874 must complete by Apr 18 or everything slips.</div></div></div>
+        <div class="sr"><span class="sr-icon s-warn">!</span><div><div class="sr-title">Demo — April 27 · North star ≥ 40% Gen-to-Send</div><div class="sr-sub">QA Plan v0.3 in review. Owner: Andrew Yeow. Contact Intelligence partial — Apr 7 target missed, recovery in-sprint.</div></div></div>
+        <div class="sr"><span class="sr-icon s-crit">!</span><div><div class="sr-title">Deadline — May 1, 2026 (hard)</div><div class="sr-sub">SSR fix also needed — 213 listings still Google-invisible. Needs formal ticket + Eric escalation this week.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECE: EMAIL ENGINE -->
+  <div id="sece" class="sec-band">
+    <div class="sec-num" style="background:#4C4C4E">✉</div>
+    <div class="sec-title">Email Campaign Engine</div>
+    <span class="sec-pill" style="background:#f0f0f0;color:#4C4C4E;border:1px solid #f0f0f0">SendGrid · ECE · Apr 16 · 4 Campaigns</span>
+  </div>
+  <div class="inner">
+    <div class="alert alert-red">📧 <strong>Campus 56 — Colliers · 4 campaigns · Apr 16.</strong> 2,074 total requests · 95.22% delivered · 42.73% open rate · 2.89% bounce · 0 spam. Campaign 4 sent Apr 16 · Subscription Manager restored ✅ — Eitan + Brant now activated. ⚠️ ECE blockers still open: ECE-145 (send timeout 500+ contacts) · ECE-146 (login failure post-large-send) · ECE-158 (CEO: brokerage-scoped campaigns). Uladzislau Paulovich assigned.</div>
+    <div class="mg4">
+      <div class="mc" style="border-top-color:#4C4C4E"><div class="mc-label">Requests — Campus 56</div><div class="mc-value">2,074</div><div class="mc-sub">Total · 4 campaigns · Colliers · Apr 16 latest</div></div>
+      <div class="mc" style="border-top-color:#EE3135"><div class="mc-label">Delivery Rate</div><div class="mc-value good">95.22%</div><div class="mc-sub">1,975 delivered · 60 bounced</div></div>
+      <div class="mc" style="border-top-color:#EE3135"><div class="mc-label">Open Rate</div><div class="mc-value good">42.73%</div><div class="mc-sub">886 opens · well above avg · 4 campaigns</div></div>
+      <div class="mc" style="border-top-color:#EE3135"><div class="mc-label">Bounce Rate</div><div class="mc-value good">2.89%</div><div class="mc-sub">60 bounced · 0 spam · stable</div></div>
+    </div>
+    <div class="two-col">
+      <div class="panel flag-red">
+        <div class="panel-hdr"><div class="panel-title">Email Funnel — Apr MTD</div><span class="b b-gray">SendGrid · 593 Requests</span></div>
+        <div class="chart-wrap lg"><canvas id="sgFunnelChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Delivery Health</div><span class="b" style="background:#282828;color:#fff">SendGrid · Apr MTD</span></div>
+        <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px">
+          <div style="position:relative;width:120px;height:120px;flex-shrink:0"><canvas id="sgHealthChart"></canvas></div>
+          <div style="flex:1">
+            <div class="br"><div class="br-lbl">Delivered</div><div class="br-track"><div class="br-fill" style="width:95%;background:#282828"></div></div><div class="br-val">1350</div></div>
+            <div class="br"><div class="br-lbl">Bounced</div><div class="br-track"><div class="br-fill" style="width:3%;background:var(--red)"></div></div><div class="br-val">60</div></div>
+            <div class="br"><div class="br-lbl">Spam Reports</div><div class="br-track"><div class="br-fill" style="width:0%;background:#888"></div></div><div class="br-val">0</div></div>
+          </div>
+        </div>
+        <div style="background:var(--green-light);border:1px solid var(--green-border);border-radius:6px;padding:10px 12px;font-size:11px;color:var(--green);line-height:1.8"><strong>✅ Domain auth solid</strong><br>DKIM · SPF · DMARC all passing on <code>email-engine-prod</code> subuser. campaigns[at]duxre.com sender verified. 0 spam reports.</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Rates vs Industry Benchmarks</div><span class="b b-gray">SendGrid · Apr MTD</span></div>
+        <p style="font-size:10px;color:var(--text3);margin-bottom:8px">* Click rate >100% = multiple clicks per email (total clicks ÷ delivered), not unique openers.</p>
+        <div class="chart-wrap lg"><canvas id="sgRatesChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Daily Send Volume — Apr MTD</div><span class="b b-gray">SendGrid · Apr 1–10 · est.</span></div>
+        <div class="chart-wrap lg"><canvas id="sgDailyChart"></canvas></div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="panel flag-red">
+        <div class="panel-hdr"><div class="panel-title">Active ECE Bugs</div><span class="b b-red">Jira · Apr 17 · Live</span></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/ECE-146" target="_blank" style="color:#EE3135;font-weight:800">ECE-146</a></div><div><div class="jira-title">🚨 BLOCKER — campaigns.duxre.com login failure after large send</div><div class="jira-sub">Platform unresponsive. Uladzislau Paulovich · Open.</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/ECE-145" target="_blank" style="color:#EE3135;font-weight:800">ECE-145</a></div><div><div class="jira-title">🚨 BLOCKER — Campaign send timeout on large list (500 contacts)</div><div class="jira-sub">Bulk sends non-functional. Uladzislau Paulovich · Open.</div></div></div>
+        <div class="jira-bug"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/ECE-148" target="_blank">ECE-148</a></div><div><div class="jira-title">AtData not suppressing invalid addresses before SendGrid send</div><div class="jira-sub">High priority · Uladzislau Paulovich · Open.</div></div></div>
+        <div class="jira-bug" style="background:#fff0f2"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/ECE-158" target="_blank" style="color:#EE3135;font-weight:800">ECE-158</a></div><div><div class="jira-title">🚨 CEO Escalation — Campaign visibility must be brokerage-scoped, not per login</div><div class="jira-sub">Very High · Sean Fulp · Uladzislau Paulovich · Open · Filed Apr 13</div></div></div>
+        <div class="jira-bug"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/ECE-161" target="_blank">ECE-161</a></div><div><div class="jira-title">🆕 Backend: Contact list CRUD + file upload APIs (.xlsx/.csv)</div><div class="jira-sub">High · In Progress · Uladzislau Paulovich · active dev</div></div></div>
+        <div class="jira-bug"><div class="jira-ticket"><a href="https://onestop.atlassian.net/browse/ECE-160" target="_blank">ECE-160</a></div><div><div class="jira-title">🆕 UX/UI — My Contact Lists management page design</div><div class="jira-sub">High · In Progress · Alex Marakas · design sprint</div></div></div>
+        <div class="jira-bug" style="opacity:.6"><div class="jira-ticket" style="color:var(--green)"><a href="https://onestop.atlassian.net/browse/ECE-149" target="_blank" style="color:var(--green)">ECE-149 ✓</a></div><div><div class="jira-title" style="text-decoration:line-through;color:var(--text3)">eric.longo[at]colliers.com — Login timeout on campaigns.duxre.com</div><div class="jira-sub">✅ Resolved &amp; Closed Apr 14 · Isolated account issue</div></div></div>
+        <div class="jira-bug"><div class="jira-ticket" style="color:var(--green);font-weight:800">ECE-141</div><div><div class="jira-title" style="color:var(--green)">✅ RESOLVED — Email link click auto-unsubscribe</div><div class="jira-sub">Closed. No longer blocking sends (new blockers above now active).</div></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Infrastructure Status</div><span class="b" style="background:#282828;color:#fff">All Auth Passing</span></div>
+        <div class="sr"><span class="sr-icon s-done">✓</span><div><div class="sr-title">SendGrid — email-engine-prod subuser</div><div class="sr-sub">DKIM · SPF · DMARC all passing. campaigns[at]duxre.com verified sender.</div></div></div>
+        <div class="sr"><span class="sr-icon s-done">✓</span><div><div class="sr-title">Event webhook live — Signed</div><div class="sr-sub">campaigns-api.duxre.com/api/v1/webhooks/sendgrid · Active since Apr 1.</div></div></div>
+        <div class="sr"><span class="sr-icon s-done">✓</span><div><div class="sr-title" style="color:var(--green)">✅ CAN-SPAM compliant footer — Deployed &amp; Live</div><div class="sr-sub">Production HTML template confirmed. Unlayer → AtData → SendGrid stack live. Resolved Apr 12.</div></div></div>
+        <div class="sr"><span class="sr-icon s-done">✓</span><div><div class="sr-title">ECE-141 — Unsubscribe link bug ✅ Resolved</div><div class="sr-sub">Closed. New blockers ECE-145 + ECE-146 are now the active campaign send issues.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SGADS: GOOGLE ADS -->
+  <div id="sout" class="sec-band">
+    <div class="sec-num" style="background:#4C4C4E">📞</div>
+    <div class="sec-title">Outreach Intelligence</div>
+    <span class="sec-pill" style="background:#f0f0f0;color:#4C4C4E;border:1px solid #BFBEBF">Shermin · Manual · Apr 14</span>
+  </div>
+  <div class="inner">
+    <div class="alert alert-blue">📋 <strong>Cold Outreach (Instantly) data pending.</strong> Sequence metrics will be added once campaign export is available. VMD and call activity tracked below.</div>
+    <div class="mg4" style="grid-template-columns:repeat(3,1fr)">
+      <div class="mc" style="border-top-color:#4C4C4E">
+        <div class="mc-label">VMD — Voicemail Drops</div>
+        <div class="mc-value">~500</div>
+        <div class="mc-sub">Every other day · West Coast brokers · Pulled back from 1,500 (3 numbers burned)</div>
+      </div>
+      <div class="mc" style="border-top-color:#282828">
+        <div class="mc-label">Scout — LinkedIn Connections</div>
+        <div class="mc-value">—</div>
+        <div class="mc-sub">Connection bot · West Coast outbound · Data pending API access</div>
+      </div>
+      <div class="mc" style="border-top-color:#4C4C4E">
+        <div class="mc-label">Avery — AI Follow-Up Bot</div>
+        <div class="mc-value">—</div>
+        <div class="mc-sub">Automated follow-up sequences · Data pending API access</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">VMD Status</div><span class="b b-gray">West Coast · Every Other Day</span></div>
+        <div class="sr"><span class="sr-icon s-warn">📞</span><div><div class="sr-title">Volume: ~500 drops / send day</div><div class="sr-sub">Reduced from 1,500 — three numbers burned at high volume. Current cadence sustainable. West Coast broker list targeting.</div></div></div>
+        <div class="sr"><span class="sr-icon s-warn">⚠️</span><div><div class="sr-title">3 numbers burned — pulled back</div><div class="sr-sub">High send volume (1,500/day) flagged numbers. Dialed back to 500 every other day. Monitor deliverability closely before scaling.</div></div></div>
+        <div class="sr"><span class="sr-icon s-done">✓</span><div><div class="sr-title">Target: West Coast CRE brokers</div><div class="sr-sub">Aligns with HubSpot West Coast segmentation wave (1,028 contacts · 939 deals). VMD cadence synced with outbound strategy.</div></div></div>
+      </div>
+      <div class="panel flag-amber">
+        <div class="panel-hdr"><div class="panel-title">Cold Outreach — Instantly</div><span class="b b-amber">Data Pending · Adding Soon</span></div>
+        <div style="padding:28px 0;text-align:center;color:var(--text3)">
+          <div style="font-size:32px;margin-bottom:10px">📧</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:6px">Sequence data coming soon</div>
+          <div style="font-size:11px;line-height:1.8">Instantly API key pending · Multi-step sequence metrics<br>will populate here once connected.<br><br>Tracking: Sent · Opens · Replies · Clicks · Opportunities</div>
+        </div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Scout — LinkedIn Connection Bot</div><span class="b b-gray">Data Pending</span></div>
+        <div style="padding:28px 0;text-align:center;color:var(--text3)">
+          <div style="font-size:32px;margin-bottom:10px">🔗</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:6px">Connection rate data pending</div>
+          <div style="font-size:11px;line-height:1.8">West Coast broker outbound via LinkedIn Sales Nav<br>Tracking: Connection requests · Accepts · InMails sent<br>API or export access needed to automate</div>
+        </div>
+      </div>
+      <div class="panel" style="border-left:4px solid #4C4C4E">
+        <div class="panel-hdr"><div class="panel-title">Avery — AI Follow-Up Bot</div><span class="b b-gray">Data Pending</span></div>
+        <div style="padding:28px 0;text-align:center;color:var(--text3)">
+          <div style="font-size:32px;margin-bottom:10px">🤖</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:6px">Follow-up sequence data pending</div>
+          <div style="font-size:11px;line-height:1.8">AI-powered follow-up after Scout connections<br>Tracking: Messages sent · Replies · Demos booked<br>API or export access needed to automate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-band">
+    <p>Autonomously built and delivered by <span>Claude AI</span> — your behind-the-scenes revenue co-pilot at Duxre.</p>
+    <p>Sources: HubSpot · Mixpanel · Jira · Confluence · LinkedIn · Stripe ✅ · Google Analytics 4 &nbsp;·&nbsp; Updated Apr 15, 2026 &nbsp;·&nbsp; Closes May 1, 2026</p>
+  </div>
+</div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// Chart defaults
+Chart.defaults.font.family = "'Nunito Sans', sans-serif";
+Chart.defaults.color = '#999';
+
+// LEAD SOURCE - horizontal bar
+try { new Chart(document.getElementById('mixChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['For Sale','For Lease'],
+    datasets: [{ data: [152,71], backgroundColor: ['#222','#EE3135'], borderWidth: 3, borderColor: '#fff', hoverOffset: 3 }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, cutout: '68%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(c){ return ' ' + c.label + ': ' + c.raw; } } } } }
+}); } catch(e) { console.warn("Chart init skipped:", e.message); }
+
+// PLATFORM LOGINS - stacked bar (Apr 1-9, real data)
+var loginDates = ['Apr 1','Apr 2','Apr 3','Apr 4','Apr 5','Apr 6','Apr 7','Apr 8','Apr 9','Apr 10','Apr 11','Apr 12','Apr 13','Apr 14','Apr 15','Apr 16','Apr 17','Apr 18','Apr 19','Apr 20'];
+var dashData =   [37,39,30,4,4,35,42,23,27,15,2,7,20,59,26,36,32,1,7,17];
+var msData =     [44,58,84,0,1,14,21,9,5,3,2,0,2,3,19];
+var mktData =    [20,15,13,3,2,11,15,30,16,30,9,4,25,27,13,16,10,1,13,14];
+try { new Chart(document.getElementById('loginChart'), {
+  type: 'bar',
+  data: {
+    labels: loginDates,
+    datasets: [
+      { label: 'Dashboard', data: dashData, backgroundColor: '#EE3135', borderRadius: 2, stack: 's' },
+      { label: 'Microsite',  data: msData,   backgroundColor: '#555',    borderRadius: 2, stack: 's' },
+      { label: 'Marketplace',data: mktData,  backgroundColor: '#aaa',    borderRadius: 2, stack: 's' }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        mode: 'index',
+        callbacks: {
+          footer: function(items){ return 'Total: ' + items.reduce(function(s,i){ return s+i.raw; }, 0); },
+          label: function(c){ return ' ' + c.dataset.label + ': ' + c.raw; }
+        }
+      }
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: '#999', font: { size: 10 }, maxRotation: 0 }, stacked: true },
+      y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { color: '#999', font: { size: 10 } }, border: { display: false }, stacked: true }
+    }
+  }
+}); } catch(e) { console.warn("Chart init skipped:", e.message); }
+
+// PLATFORM donut
+try { new Chart(document.getElementById('platformChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Dashboard','Microsite','Marketplace'],
+    datasets: [{ data: [842,474,395], backgroundColor: ['#EE3135','#555','#aaa'], borderWidth: 3, borderColor: '#fff', hoverOffset: 3 }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, cutout: '68%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(c){ return ' ' + c.label + ': ' + c.raw; } } } } }
+}); } catch(e) { console.warn("Chart init skipped:", e.message); }
+
+// SG FUNNEL - horizontal bar
+try { new Chart(document.getElementById('sgFunnelChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Requests', 'Delivered', 'Opened', 'Clicked (total)'],
+    datasets: [{ data: [2074, 1975, 886, 1502], backgroundColor: ['#555','#636466','#282828','#4C4C4E'], borderRadius: 4, borderSkipped: false }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(c){ return ' ' + c.raw; } } } },
+    scales: {
+      x: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { color: '#999', font: { size: 11 } }, border: { display: false } },
+      y: { grid: { display: false }, ticks: { color: '#555', font: { size: 11, weight: '600' } }, border: { display: false } }
+    }
+  }
+}); } catch(e) { console.warn("Chart init skipped:", e.message); }
+
+// SG HEALTH donut
+try { new Chart(document.getElementById('sgHealthChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Delivered','Bounced','Spam'],
+    datasets: [{ data: [1975, 60, 0], backgroundColor: ['#636466','#EE3135','#888'], borderWidth: 3, borderColor: '#fff', hoverOffset: 3 }]
+  },
+  options: { responsive: true, maintainAspectRatio: false, cutout: '68%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(c){ return ' ' + c.label + ': ' + (c.label==='Spam'?'0':c.raw); } } } } }
+}); } catch(e) { console.warn("Chart init skipped:", e.message); }
+
+// SG RATES grouped bar vs benchmarks
+try { new Chart(document.getElementById('sgRatesChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Delivery Rate','Open Rate','Click Rate*','Bounce Rate'],
+    datasets: [
+      { label: 'Campus 56 · 4 Campaigns', data: [95.22, 42.73, 102.25, 2.89], backgroundColor: ['#636466','#282828','#4C4C4E','#EE3135'], borderRadius: 4, borderSkipped: false },
+      { label: 'Industry Avg', data: [95, 25, 3, 2], backgroundColor: ['rgba(22,101,52,.18)','rgba(10,102,194,.18)','rgba(124,58,237,.18)','rgba(200,16,46,.18)'], borderRadius: 4, borderSkipped: false }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: true, position: 'bottom', labels: { font: { size: 10 }, padding: 8, boxWidth: 10 } }, tooltip: { callbacks: { label: function(c){ return ' ' + c.dataset.label + ': ' + c.raw + '%'; } } } },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: '#555', font: { size: 10, weight: '600' } }, border: { display: false } },
+      y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { color: '#999', font: { size: 10 }, callback: function(v){ return v + '%'; } }, border: { display: false }, max: 130 }
+    }
+  }
+}); } catch(e) { console.warn("Chart init skipped:", e.message); }
+
+// SG DAILY send volume (est. from screenshot spike pattern)
+try { new Chart(document.getElementById('sgDailyChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Apr 1','Apr 2','Apr 3','Apr 4','Apr 5','Apr 6','Apr 7','Apr 8','Apr 9','Apr 10'],
+    datasets: [{ label: 'Requests', data: [2, 12, 18, 10, 15, 12, 18, 30, 290, 186], backgroundColor: '#4C4C4E', borderRadius: 3 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(c){ return ' ' + c.raw + ' requests'; } } } },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: '#999', font: { size: 10 }, maxRotation: 0 }, border: { display: false } },
+      y: { grid: { color: 'rgba(0,0,0,.04)' }, ticks: { color: '#999', font: { size: 10 } }, border: { display: false } }
+    }
+  }
+}); } catch(e) { console.warn("Chart init skipped:", e.message); }
+
+// LINKEDIN SPEND donut
+</script>
+
+  <div id="sli" class="sec-band">
+    <div class="sec-num" style="background:#0a66c2"><svg viewBox="0 0 16 16" fill="white" width="11" height="11"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/></svg></div>
+    <div class="sec-title">LinkedIn Paid Advertising</div>
+    <span class="sec-pill b-li">Live · Apr 12</span>
+  </div>
+  <div class="inner">
+    <div class="mg4">
+      <div class="mc blue"><div class="mc-label">Total Spend</div><div class="mc-value">$1,445.96</div><div class="mc-sub">5 active ad sets</div></div>
+      <div class="mc blue"><div class="mc-label">Impressions</div><div class="mc-value">176,251</div><div class="mc-sub">Across all 5 ad sets</div></div>
+      <div class="mc blue"><div class="mc-label">Website Visits</div><div class="mc-value">1,442</div><div class="mc-sub">All visit-objective sets combined</div></div>
+      <div class="mc blue"><div class="mc-label">Blended CTR / CPC</div><div class="mc-value" style="font-size:20px">0.82% / $0.70</div><div class="mc-sub">Avg eng. time 19.07s</div></div>
+    </div>
+
+    <!-- Creative cards -->
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-hdr"><div class="panel-title">Creative Performance</div><span class="b b-li">Content Engagement · Apr 1–Apr 10</span></div>
+      <div class="creative-grid">
+        <div class="creative-card">
+          <div class="creative-thumb" style="background:linear-gradient(135deg,#282828,#4C4C4E)"><div class="creative-badge">📹 VIDEO</div><div class="creative-headline">Why CRE Deals Stall Before Negotiations Even Start</div></div>
+          <div class="creative-stats"><div class="creative-camp">Real estate deals don't slow down</div><div class="creative-row"><span style="color:var(--text2)">Visits</span><span style="font-weight:700;color:var(--green)">351</span></div><div class="creative-row"><span style="color:var(--text2)">Eng. rate</span><span style="font-weight:700;color:var(--green)">6.5%</span></div><div class="creative-row"><span style="color:var(--text2)">CTR</span><span style="font-weight:700;color:var(--green)">6.45%</span></div><div style="margin-top:5px"><span class="b" style="background:#282828;color:#fff" style="font-size:9px">🔥 Top CTR</span></div></div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-thumb" style="background:linear-gradient(135deg,#1e3a5f,#2d5986)"><div class="creative-badge">🖼 IMAGE</div><div class="creative-headline">Run Your Brokerage. Not Your Tools.</div></div>
+          <div class="creative-stats"><div class="creative-camp">Run Your Brokerage Not Your Tools</div><div class="creative-row"><span style="color:var(--text2)">Visits</span><span style="font-weight:700;color:var(--amber)">2</span></div><div class="creative-row"><span style="color:var(--text2)">Eng. rate</span><span style="font-weight:700">1.73%</span></div><div class="creative-row"><span style="color:var(--text2)">CTR</span><span style="font-weight:700">0.38%</span></div><div style="margin-top:5px"><span class="b b-amber" style="font-size:9px">🟡 Ramping</span></div></div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-thumb" style="background:linear-gradient(135deg,#1a1a1a,#2d2d2d)"><div class="creative-badge" style="background:rgba(200,16,46,.8)">🖼 IMAGE</div><div class="creative-headline">Your deals aren't dying in negotiations. They're dying between your tools.</div></div>
+          <div class="creative-stats"><div class="creative-camp">CRE brokers lose deals · ID: 578314934</div><div class="creative-row"><span style="color:var(--text2)">Visits</span><span style="font-weight:700;color:var(--green)">1,063</span></div><div class="creative-row"><span style="color:var(--text2)">Eng. rate</span><span style="font-weight:700">1.22%</span></div><div class="creative-row"><span style="color:var(--text2)">CTR</span><span style="font-weight:700">1.22%</span></div><div style="margin-top:5px"><span class="b" style="background:#282828;color:#fff" style="font-size:9px">🏆 Most Visits</span></div></div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-thumb" style="background:linear-gradient(135deg,#2d1b69,#11998e)"><div class="creative-badge">🖼 IMAGE</div><div class="creative-headline">Stop Managing 5 Tools. Start Running Your Business.</div></div>
+          <div class="creative-stats"><div class="creative-camp">Deal Context West Coast · ID: 584800194</div><div class="creative-row"><span style="color:var(--text2)">Visits</span><span style="font-weight:700;color:var(--amber)">1</span></div><div class="creative-row"><span style="color:var(--text2)">Eng. rate</span><span style="font-weight:700">0.91%</span></div><div class="creative-row"><span style="color:var(--text2)">CTR</span><span style="font-weight:700">0.15%</span></div><div style="margin-top:5px"><span class="b b-amber" style="font-size:9px">🟡 Ramping</span></div></div>
+        </div>
+        <div class="creative-card">
+          <div class="creative-thumb" style="background:linear-gradient(135deg,#232526,#414345)"><div class="creative-badge">📢 BRAND</div><div class="creative-headline">Most brokers don't lose deals. They lose momentum.</div></div>
+          <div class="creative-stats"><div class="creative-camp">Most Brokers Don't Lose Deals</div><div class="creative-row"><span style="color:var(--text2)">Reach</span><span style="font-weight:700;color:var(--green)">13,369</span></div><div class="creative-row"><span style="color:var(--text2)">Spend</span><span style="font-weight:700">$70.87</span></div><div class="creative-row"><span style="color:var(--text2)">CPM</span><span style="font-weight:700;color:var(--green)">$2.39</span></div><div style="margin-top:5px"><span style="display:inline-flex;align-items:center;gap:4px;background:#282828;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700" style="font-size:9px">👁 Brand Reach</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-hdr"><div class="panel-title">Ad Set Performance</div><span class="b b-li">Live · LinkedIn Campaign Manager · Apr 12</span></div>
+      <table class="tbl">
+        <thead><tr><th style="width:28%">Ad Set / Creative</th><th>Status</th><th>Spend</th><th>Impressions</th><th>Visits / Reach</th><th>CTR</th><th>CPC</th><th>Type</th></tr></thead>
+        <tbody>
+          <tr><td class="em">Your deals aren't dying in negotiations<br><span style="font-size:10px;color:var(--text3);font-weight:400">ID: 1239483934 · CRE brokers lose deals</span></td><td><span class="b" style="background:#282828;color:#fff">Active</span></td><td class="em">$334.66</td><td>82,474</td><td style="color:var(--green);font-weight:700">1,063</td><td style="color:var(--green);font-weight:700">1.29%</td><td style="color:var(--green);font-weight:700">$0.31</td><td style="font-size:10px;color:var(--text3)">Visits · Image</td></tr>
+          <tr><td class="em">Why CRE Deals Stall Before Negotiations<br><span style="font-size:10px;color:var(--text3);font-weight:400">ID: 1236318584 · Real estate deals don't slow down</span></td><td><span class="b" style="background:#282828;color:#fff">Active</span></td><td class="em">$283.67</td><td>5,532</td><td style="color:var(--green);font-weight:700">351</td><td style="color:var(--green);font-weight:700">6.34%</td><td>$0.81</td><td style="font-size:10px;color:var(--text3)">Visits · Video</td></tr>
+          <tr><td class="em">Most brokers don't lose deals<br><span style="font-size:10px;color:var(--text3);font-weight:400">ID: 1244789624 · Most Brokers Don't Lose Deals</span></td><td><span class="b" style="background:#282828;color:#fff">Active</span></td><td class="em">$159.56</td><td>85,569</td><td style="color:var(--text2);font-weight:700">44,012 reach</td><td>0.03%</td><td style="color:var(--text3)">—</td><td style="font-size:10px;color:var(--text3)">Brand</td></tr>
+          <tr style="background:#f9f9f9"><td class="em">Stop Managing 5 Tools. Start Running.<br><span style="font-size:10px;color:var(--text3);font-weight:400">ID: 1244381694 · Deal Context West Coast</span></td><td><span class="b" style="background:#282828;color:#fff">Active</span></td><td class="em">$118.10</td><td>1,404</td><td style="color:var(--amber);font-weight:700">4</td><td>0.28%</td><td style="color:var(--amber)">$29.53</td><td style="font-size:10px;color:var(--text3)">Visits · Image</td></tr>
+          <tr style="background:#f9f9f9"><td class="em">Run Your Brokerage. Not Your Tools.<br><span style="font-size:10px;color:var(--text3);font-weight:400">ID: 1245681794 · Run Your Brokerage</span></td><td><span class="b" style="background:#282828;color:#fff">Active</span></td><td class="em">$116.49</td><td>1,272</td><td style="color:var(--amber);font-weight:700">2</td><td>0.16%</td><td style="color:var(--amber)">$58.25</td><td style="font-size:10px;color:var(--text3)">Visits · Image</td></tr>
+          <tr style="background:var(--surface2)"><td class="em">Total — 5 Ad Sets</td><td></td><td class="em">$1,445.96</td><td class="em">176,251</td><td class="em">1,442</td><td class="em">0.82%</td><td class="em">$0.70</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Spend by Ad Set</div></div>
+        <div class="leg">
+          <span><span class="leg-sq" style="background:#EE3135"></span>CRE brokers lose deals (33%)</span>
+          <span><span class="leg-sq" style="background:#888"></span>Real estate deals (28%)</span>
+          <span><span class="leg-sq" style="background:#555"></span>Most Brokers Brand (16%)</span>
+          <span><span class="leg-sq" style="background:#bbb"></span>Deal Context WC (12%)</span>
+          <span><span class="leg-sq" style="background:#ddd"></span>Run Your Brokerage (11%)</span>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Ad Set Intelligence</div></div>
+        <div class="ikv"><strong>Your deals aren't dying (Image) —</strong> Volume workhorse. 1,063 visits at $0.31 CPC. Highest absolute traffic. Scale budget here first.</div>
+        <div class="ikv"><strong>Why CRE Deals Stall (Video) —</strong> 6.34% CTR is 6× LinkedIn norm on just 5,532 impressions. Audience match is exceptional — increase budget and broaden reach.</div>
+        <div class="ikv"><strong>Most Brokers Don't Lose Deals (Brand) —</strong> 85,569 impressions · 44,012 unique reach. Pure top-of-funnel at $159.56. Best for retargeting pool growth.</div>
+        <div class="ikv"><strong>Stop Managing 5 Tools / Run Your Brokerage —</strong> Both underperforming on visits ($29–58 CPC). Pause or swap creatives before spending further.</div>
+        <div class="ikv"><strong>Blended —</strong> $0.70 CPC still well below LinkedIn benchmark ($5–8). Total spend $1,445.96 MTD. CAC: $206.57 (7 closes). Next Apex close transforms this ratio significantly.</div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="sgads" class="sec-band">
+    <div class="sec-num" style="background:#EE3135"><svg viewBox="0 0 16 16" fill="white" width="11" height="11"><path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/></svg></div>
+    <div class="sec-title">Google Ads</div>
+    <span class="sec-pill b-amber">Early Launch · Apr MTD</span>
+  </div>
+  <div class="inner">
+    <div class="alert alert-amber">⚠️ <strong>Google Ads — Early Launch Stage.</strong> One campaign paused · one active with $0 spend. All activity from a single Sunday run. 13 keywords live on West Coast campaign — not yet serving. Data will grow significantly once campaigns are fully activated.</div>
+    <div class="mg4">
+      <div class="mc" style="border-top-color:#EE3135"><div class="mc-label">Total Spend (Apr MTD)</div><div class="mc-value" style="font-size:26px">$4.79</div><div class="mc-sub">Single campaign · Sunday run only</div></div>
+      <div class="mc" style="border-top-color:#EE3135"><div class="mc-label">Impressions</div><div class="mc-value">1,116</div><div class="mc-sub">81% Display · 13% Search</div></div>
+      <div class="mc" style="border-top-color:#EE3135"><div class="mc-label">Clicks / CTR</div><div class="mc-value">16</div><div class="mc-sub">1.43% CTR · $0.30 blended CPC</div></div>
+      <div class="mc" style="border-top-color:#636466"><div class="mc-label">Active Campaigns</div><div class="mc-value amber">1 of 2</div><div class="mc-sub">West Coast active · CRE Brokers paused</div></div>
+    </div>
+
+    <div class="two-col">
+      <div class="panel flag-amber">
+        <div class="panel-hdr"><div class="panel-title">Campaign Status</div><span class="b b-gray">Google Ads · Apr 12</span></div>
+        <table class="tbl">
+          <thead><tr><th>Campaign</th><th>Status</th><th>Spend</th><th>Clicks</th><th>CTR</th></tr></thead>
+          <tbody>
+            <tr style="background:#f9f9f9"><td class="em">Commercial Real Estate Brokers</td><td><span class="b b-amber">Paused</span></td><td class="em">$4.79</td><td>16</td><td style="color:var(--green);font-weight:700">1.43%</td></tr>
+            <tr><td class="em">Duxre | CRE Brokers | West Coast</td><td><span class="b" style="background:#282828;color:#fff">Active</span></td><td style="color:var(--text3)">$0.00</td><td style="color:var(--text3)">0</td><td style="color:var(--text3)">—</td></tr>
+            <tr style="background:var(--surface2)"><td class="em">Total</td><td></td><td class="em">$4.79</td><td class="em">16</td><td class="em">1.43%</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:11px;color:var(--text3);margin-top:10px">13 keywords active on West Coast campaign (CRE broker software, CRE platform, Duxre brand terms). All showing $0 spend — campaign needs budget activation.</p>
+      </div>
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title">Traffic Breakdown</div><span class="b b-gray">Networks &amp; Devices</span></div>
+        <p class="panel-label">By network</p>
+        <div class="br"><div class="br-lbl">Display Network</div><div class="br-track"><div class="br-fill" style="width:81%;background:#EE3135"></div></div><div class="br-val">81%</div></div>
+        <div class="br"><div class="br-lbl">Google Search</div><div class="br-track"><div class="br-fill" style="width:13%;background:#282828"></div></div><div class="br-val">13%</div></div>
+        <div class="br"><div class="br-lbl">Search Partners</div><div class="br-track"><div class="br-fill" style="width:6%;background:#BFBEBF"></div></div><div class="br-val">6%</div></div>
+        <p class="panel-label" style="margin-top:12px">By device</p>
+        <div class="br"><div class="br-lbl">Mobile</div><div class="br-track"><div class="br-fill" style="width:69%;background:#EE3135"></div></div><div class="br-val">69%</div></div>
+        <div class="br"><div class="br-lbl">Tablet</div><div class="br-track"><div class="br-fill" style="width:23%;background:#282828"></div></div><div class="br-val">23%</div></div>
+        <div class="br"><div class="br-lbl">Desktop</div><div class="br-track"><div class="br-fill" style="width:6%;background:#aaa"></div></div><div class="br-val">6%</div></div>
+        <div style="margin-top:12px;background:var(--blue-light);border:1px solid var(--blue-border);border-radius:6px;padding:10px 12px;font-size:11px;color:var(--blue);line-height:1.8">
+          <strong>⚡ All activity on Sunday only · 12AM–4AM window</strong><br>Overnight hours driving all impressions. Likely display ads serving internationally or in non-target timezone. Review ad scheduling before scaling budget.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOUT: OUTREACH -->
+
+
+  <!-- S_META: Meta Ads -->
+  <div id="smeta" class="sec-band">
+    <div class="sec-num" style="background:#1877F2"><svg viewBox="0 0 24 24" fill="white" width="12" height="12"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></div>
+    <div class="sec-title">Meta Ads</div>
+    <span class="sec-pill b-green">Active ✅ · 603 Total Leads · HubSpot Tracked</span>
+  </div>
+  <div class="inner">
+    <div class="alert alert-green" style="background:#f5f5f5;border-color:#BFBEBF;color:#282828">✅ <strong>Meta Ads active — "duxre | p1 team leader | conversions" campaign live.</strong> 603 total leads all-time. Account recovered Apr 20. Campaign relaunched — new April leads flow automatically into HubSpot.</div>
+    <div class="mg4">
+      <div class="mc blue" style="border-top-color:#1877F2"><div class="mc-label">Account Status</div><div class="mc-value good" style="font-size:20px">Active ✅</div><div class="mc-sub">bforester@duxre.com · Recovered Apr 20</div></div>
+      <div class="mc" style="border-top-color:#1877F2"><div class="mc-label">Total Leads (All-Time)</div><div class="mc-value" style="color:#1877F2">603</div><div class="mc-sub">HubSpot · Facebook / Paid Social</div></div>
+      <div class="mc" style="border-top-color:#1877F2"><div class="mc-label">Active Campaign</div><div class="mc-value" style="font-size:14px;color:#1877F2">duxre | p1 team leader</div><div class="mc-sub">Conversions objective · West Coast targeting</div></div>
+      <div class="mc" style="border-top-color:#1877F2"><div class="mc-label">Mar 2026 CTR</div><div class="mc-value">2.5%</div><div class="mc-sub">45% above industry avg · Interest Stack ad set</div></div>
+    </div>
+  </div>
+
+<!-- S3: SEO -->
+
+</body>
+</html>
