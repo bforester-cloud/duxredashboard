@@ -1,50 +1,51 @@
 window.DUXRE = {
 meta: {
   title: "Revenue Operations — April 2026",
-  updated: "Apr 20, 2026",
+  updated: "Apr 22, 2026",
   period: "April 2026 MTD"
 },
 hero: [
   { label: "Total Apex ARR", value: "$65K", sub: "7 teams · 22 users", color: "#EE3135" },
-  { label: "New Ignites MTD", value: "10", sub: "April 2026 · 10 confirmed signups", color: "#282828" },
+  { label: "New Ignites MTD", value: "13", sub: "April 2026 · 3 added Apr 21 via email/LinkedIn/VMD", color: "#282828" },
   { label: "Power Brokers", value: "33", goal: 50, sub: "4 Apex · 29 Ignite confirmed", color: "#EE3135" },
-  { label: "Active Listings", value: "248", goal: 300, sub: "82.7% to goal", color: "#282828" },
-  { label: "Demos Booked MTD", value: "10", goal: 20, sub: "50% to goal · April 2026", color: "#EE3135" }
+  { label: "Active Listings", value: "255", goal: 300, sub: "85% to goal · 7+ added by Alina Apr 21", color: "#282828" },
+  { label: "Demos Booked MTD", value: "12", goal: 20, sub: "60% to goal · Virgilio Fernandez added Apr 21", color: "#EE3135" }
 ],
 s1_targets: [
+  { name: "Joe Cesta", company: "CBRE Capital Markets", priority: "hot", owner: "Shermin", status: "Demo Apr 27 · BlackRock client · Sean invited · confirmed", date: "Apr 27" },
   { name: "Kevin Ramon", company: "Texas Close'em", priority: "hot", owner: "Shermin", status: "Microsite + Apex · 60% prob · close target Apr 30", date: "Apr 30" },
-  { name: "Joe Cesta", company: "CBRE Capital Markets", priority: "hot", owner: "Shermin", status: "Demo Apr 27 · BlackRock client · Sean invited", date: "Apr 27" },
-  { name: "Alex Bernaldo", company: "Americas CRE", priority: "warm", owner: "Shermin", status: "Demo ✅ Apr 22 completed · Team member signing up for Ignite · Alina on standby", date: "Converting" },
-  { name: "Felipe Echarte", company: "M&M Fort Lauderdale", priority: "hot", owner: "Shermin", status: "Demo Apr 23 · 6:00pm EST · 50% prob", date: "Apr 23" },
-  { name: "Austin Bull", company: "Bull Realty Atlanta", priority: "hot", owner: "Shermin", status: "Demo Apr 22 · 9:00am EST · 50% prob", date: "Apr 22" },
+  { name: "Felipe Echarte", company: "Marcus & Millichap", priority: "hot", owner: "Shermin", status: "Demo ✅ confirmed Thu 4/23 · 6:00pm EST · Senior MD Investments", date: "Apr 23" },
+  { name: "Virgilio Fernandez", company: "Cushman & Wakefield", priority: "hot", owner: "Shermin", status: "Demo Fri 4/24 · 4:00pm EST · FL Institutional Multifamily · Andres joining", date: "Apr 24" },
+  { name: "Jake Allen", company: "Matthews", priority: "hot", owner: "Shermin", status: "Demo Thu 4/24 · 8:30am EST", date: "Apr 24" },
+  { name: "Austin Bull", company: "Bull Realty Atlanta", priority: "hot", owner: "Shermin", status: "Demo Apr 22 · 9:00am EST · VP of The Office Group", date: "Apr 22" },
+  { name: "Alex Bernaldo", company: "Americas CRE", priority: "warm", owner: "Shermin", status: "Demo ✅ Apr 22 completed · Team member signing up Ignite · Boutique industrial CRE Miami · Alina on standby", date: "Converting" },
   { name: "Brett Intrater", company: "Cushman & Wakefield", priority: "hot", owner: "Shermin", status: "Demo No Show · 10% prob · May 31 · re-engage needed", date: "May 31" },
-  { name: "Josh Blackledge", company: "Gulf States Commercial", priority: "warm", owner: "Shermin", status: "Demo Apr 21 · 3:30pm CST · Marketing Manager joining", date: "Apr 21" },
-  { name: "Jake Allen", company: "Matthews", priority: "warm", owner: "Shermin", status: "Demo Apr 24 · 8:30am EST", date: "Apr 24" },
+  { name: "Josh Blackledge", company: "Gulf States Commercial", priority: "warm", owner: "Shermin", status: "Demo completed Apr 21 · Marketing Manager attended · follow-up active", date: "Apr 21 ✓" },
   { name: "Sam Aaron", company: "CBRE", priority: "warm", owner: "Shermin", status: "Demo completed · partner discussion in progress", date: "Apr 13 ✓" },
   { name: "Jason Fefer", company: "M&M Los Angeles", priority: "warm", owner: "Shermin", status: "Demo completed · 30% prob · follow-up Jun 2", date: "Jun 2" },
   { name: "Antonio Diona", company: "Matthews", priority: "warm", owner: "Shermin", status: "30% prob · follow-up Apr 24", date: "Apr 24" },
-  { name: "Fabio Faerman", company: "FA Commercial", priority: "warm", owner: "Shermin", status: "30% prob · follow-up Apr 22", date: "Apr 22" },
-  { name: "Team Rodriguez", company: "CBRE", priority: "warm", owner: "Shermin", status: "Listings review done · Rebill confirmed Apr 20 · website push this week", date: "Active" },
-  { name: "Cole Neville", company: "NAI Horizon", priority: "warm", owner: "Alina", status: "Onboarding Apr 21", date: "Apr 21" },
+  { name: "Fabio Faerman", company: "FA Commercial", priority: "warm", owner: "Shermin", status: "Demo scheduled · follow-up Apr 22", date: "Apr 22" },
+  { name: "Team Rodriguez", company: "CBRE", priority: "warm", owner: "Shermin", status: "Leticia Mendez login resolved Apr 21 · listings visible · website push this week", date: "Active" },
+  { name: "Cole Neville", company: "NAI Horizon", priority: "warm", owner: "Alina", status: "Onboarding rescheduled Apr 21 · 10:00am MT", date: "Apr 21 ✓" },
   { name: "Shane Young", company: "Young Lewin Advisors", priority: "closed", owner: "Shermin", status: "Ignite · $800M+ volume · Apex upsell target", date: "Apr 7" },
   { name: "Filip Niculete", company: "Marcus & Millichap", priority: "closed", owner: "Alina", status: "Ignite closed · 25 listings · Command upsell", date: "Onboarded" },
   { name: "Brant Yasaka", company: "NAI CBI Hawaii", priority: "closed", owner: "Shermin", status: "Ignite activated · onboarding follow-up", date: "Activated" },
   { name: "Eitan Hakami", company: "—", priority: "closed", owner: "Shermin", status: "Ignite activated · onboarding follow-up", date: "Activated" },
-  { name: "Daniel Tour", company: "Clearwood Partners", priority: "closed", owner: "Alina", status: "Ignite Free signup · onboarding needed", date: "Apr 20" },
-  { name: "Andrew Naegele", company: "—", priority: "closed", owner: "Alina", status: "Ignite Free signup · onboarding needed", date: "Apr 20" }
+  { name: "Daniel Tour", company: "Omninet Capital", priority: "closed", owner: "Alina", status: "Ignite Free signup Apr 20 · Beverly Hills CA · Strong ICP · Command upsell target", date: "Apr 20" },
+  { name: "Andrew Naegele", company: "—", priority: "closed", owner: "Alina", status: "Ignite Free signup Apr 15 · qualification pending", date: "Apr 15" }
 ],
 s1_leadSources: [
   { label: "Smart List · Top Brokers 2026", count: 1028, pct: 75.5, color: "#EE3135" },
   { label: "C&W Canada Scout · +245 this month", count: 291, pct: 21.4, color: "#EE3135" },
   { label: "CBRE Executive Tier · Apr 5", count: 17, pct: 1.2, color: "#282828" },
   { label: "CBRE West Coast Expansion · Apr 8", count: 15, pct: 1.1, color: "#282828" },
-  { label: "Organic Ignite Signups", count: 6, pct: 0.4, color: "#4C4C4E" },
-  { label: "Other / Direct Adds", count: 5, pct: 0.4, color: "#BFBEBF" }
+  { label: "Organic Ignite Signups", count: 13, pct: 0.5, color: "#4C4C4E" },
+  { label: "Other / Direct Adds", count: 9, pct: 0.3, color: "#BFBEBF" }
 ],
 s2_ga4: {
   kpis: [
     { label: "Total Sessions", value: "3,872", sub: "2,800 users · Apr 1–20 2026", color: "#EE3135" },
-    { label: "LinkedIn Sessions", value: "1,100", sub: "#1 paid channel · Paid Social + LinkedIn ads", color: "#282828" },
+    { label: "Daily Sessions · Apr 22", value: "242", sub: "duxre.com 181 · marketplace 61 · from Slack bot", color: "#282828" },
     { label: "Organic Search", value: "116", sub: "↑ 6x jump from 18 · SSR + SEO fixes working ✅", color: "#EE3135" },
     { label: "Direct Sessions", value: "1,116", sub: "#1 overall channel · strong brand awareness", color: "#4C4C4E" }
   ],
@@ -107,10 +108,10 @@ s3_seo: {
 },
 s4_marketplace: {
   kpis: [
-    { label: "Active Listings", value: "215", sub: "Growing · audit in progress" },
+    { label: "Active Listings", value: "255", sub: "7+ added by Alina Apr 21 · audit in progress" },
     { label: "For Sale", value: "152+", sub: "Updating daily" },
     { label: "For Lease", value: "71+", sub: "Updating daily" },
-    { label: "New Ignites — Apr MTD", value: "7", sub: "Pavich · Lopez · Young · Shields · Ramos · Hakami · Yasaka" }
+    { label: "New Ignites — Apr MTD", value: "13", sub: "3 added Apr 21 via email/LinkedIn/VMD" }
   ],
   topListings: [
     { name: "Cornerstone at Cottonwood Corporate Center", views: 96 },
@@ -129,13 +130,13 @@ s4_marketplace: {
 },
 s5_platform: {
   kpis: [
-    { label: "Broker Logins — 30d", value: "1,711", sub: "Total all: 1,584 · Mixpanel live · Apr 12" },
+    { label: "Broker Logins — Apr MTD", value: "1,244", sub: "Dashboard 559 · Marketplace 358 · Microsite 327 · Live Apr 22" },
     { label: "Listing Detail Views — 30d", value: "905", sub: "826 page views · 274 contact views" },
-    { label: "Active Subscriptions", value: "104", sub: "Ignite (104 lines) · Apex 7 teams · Stripe live" },
+    { label: "Active Subscriptions", value: "110+", sub: "Ignite + Apex · Stripe live · 3 new added Apr 21" },
     { label: "CAC (Apr MTD)", value: "$160", sub: "$640.19 ÷ 4 closes · LinkedIn-only" }
   ],
   platformLogins: {
-    dashboard: 753, microsite: 474, marketplace: 395
+    dashboard: 559, microsite: 327, marketplace: 358
   },
   apexTeams: [
     { name: "Colliers Western Region", company: "Colliers", members: [
@@ -185,31 +186,31 @@ s5_platform: {
     { name: "Jon England", company: "NAI Heartland", team: "Team England", tier: "Apex", dash: 7, mkt: 0, total: 7 }
   ],
   onbQueue: [
-    { name: "Shobhan Sheth", company: "Sheth LLC", status: "ONB Scheduled", next: "Apr 13" },
-    { name: "Cole Neville", company: "NAI Horizon", status: "ONB Scheduled", next: "Apr 21" },
-    { name: "Jeremy Thornton", company: "Colliers", status: "Access Ready", next: "TBD" },
+    { name: "Virgilio Fernandez", company: "Cushman & Wakefield", status: "Demo Fri 4/24", next: "Apr 24" },
+    { name: "Alex Bernaldo team", company: "Americas CRE", status: "Ignite Signup Pending", next: "This week" },
+    { name: "Cole Neville", company: "NAI Horizon", status: "ONB Apr 21 ✓", next: "Done" },
     { name: "Brant Yasaka", company: "NAI CBI Hawaii", status: "Access Ready", next: "This week" },
-    { name: "Jamison Shields", company: "Colliers Portland", status: "Just Closed", next: "ONB TBD" }
+    { name: "Daniel Tour", company: "Omninet Capital", status: "Ignite Free · ONB Needed", next: "Alina" }
   ]
 },
 s6_health: {
   bugCount: 36,
   criticalBugs: [
-    { ticket: "DTM-5650", title: "🔥 NEW — Registration Flow Critically Broken on Staging (DTM-5553 regression)", detail: "Fix for 'Other' account type caused full registration regression. Dhruv Patel · Ready For Deployment." },
-    { ticket: "DTM-5651", title: "🔥 NEW — No registration confirmation emails sent for any account type", detail: "Critical · Staging · Dhruv Patel · Ready For Deployment." },
-    { ticket: "DTM-5652", title: "🔥 NEW — Occupier registration shows Investor fields in step 2", detail: "Critical · Dhruv Patel · Ready For Deployment." },
-    { ticket: "DASH-1563", title: "🔥 NEW — Property Intelligence Agent: address lookup broken [WED DEMO BLOCKER]", detail: "Critical · Mark Elmore · Dev Code Review · Must ship before Apr 22 Bernaldo demo" },
-    { ticket: "DASH-1564", title: "🔥 NEW — Company Intelligence Agent: company lookup broken [WED DEMO BLOCKER]", detail: "Critical · Mark Elmore · Dev Code Review · Must ship before Apr 22 Bernaldo demo" },
-    { ticket: "DASH-1566", title: "🔥 NEW — Tenant isolation: DASH conversation history visible across tenants after switch", detail: "Critical · Unassigned · To Do · Security/privacy risk · tenant data leaking" },
-    { ticket: "DASH-1562", title: "🔥 NEW — Search returns irrelevant tenant listings (wrong tenant data shown)", detail: "Critical · Mark Elmore · To Do" },
-    { ticket: "DASH-1578", title: "🔥 NEW — Dashboard Dash tiles: Property/Contact/Company agent routing not scoped", detail: "Critical · Dennis Nguyen · To Do · Rich card vs prose output inconsistent" },
-    { ticket: "DASH-1497", title: "💥 NEW — Frontend: Intelligence tab renders 5-section response", detail: "Critical · Jovan Toskic · To Do" },
+    { ticket: "DTM-5650", title: "🔥 Registration Flow Critically Broken on Staging (DTM-5553 regression)", detail: "Fix for 'Other' account type caused full registration regression. Dhruv Patel · Ready For Deployment." },
+    { ticket: "DTM-5651", title: "🔥 No registration confirmation emails sent for any account type", detail: "Critical · Staging · Dhruv Patel · Ready For Deployment." },
+    { ticket: "DTM-5652", title: "🔥 Occupier registration shows Investor fields in step 2", detail: "Critical · Dhruv Patel · Ready For Deployment." },
+    { ticket: "DASH-1563", title: "🔥 Property Intelligence Agent: address lookup broken", detail: "Critical · Mark Elmore · Dev Code Review · Demo blocker resolved before Apr 22 Bernaldo demo" },
+    { ticket: "DASH-1564", title: "🔥 Company Intelligence Agent: company lookup broken", detail: "Critical · Mark Elmore · Dev Code Review" },
+    { ticket: "DASH-1566", title: "🔥 Tenant isolation: DASH conversation history visible across tenants", detail: "Critical · Unassigned · To Do · Security/privacy risk · tenant data leaking" },
+    { ticket: "DASH-1562", title: "🔥 Search returns irrelevant tenant listings (wrong tenant data shown)", detail: "Critical · Mark Elmore · To Do" },
+    { ticket: "DASH-1578", title: "🔥 Dashboard Dash tiles: Property/Contact/Company agent routing not scoped", detail: "Critical · Dennis Nguyen · To Do · Rich card vs prose output inconsistent" },
+    { ticket: "DASH-1497", title: "💥 Frontend: Intelligence tab renders 5-section response", detail: "Critical · Jovan Toskic · To Do" },
     { ticket: "DASH-1445", title: "🔥 Company & Property Intelligence agents not functioning on production", detail: "Critical · Regression · Mark Elmore · To Do · Affects Colliers enterprise users" },
-    { ticket: "DASH-1410", title: "🔥 NEW — Contact Intelligence agent not functioning for Sean Fulp's contacts", detail: "Critical · Mark Elmore · To Do" },
-    { ticket: "DASH-1444", title: "🔥 NEW — Contact Intelligence API endpoints for Marketplace frontend", detail: "Critical · Ebenge Usip · Ready for Staging ✅ · Due Apr 22" },
-    { ticket: "DASH-1443", title: "🔥 NEW — Contact Intelligence dedicated route for Marketplace Intelligence tab", detail: "Critical · Ebenge Usip · Ready for Staging ✅ · Due Apr 22" },
-    { ticket: "DTM-5713", title: "🔥 NEW — Listing Console slow to load · impacted Stone Point Capital demo", detail: "Critical · Ready For Deployment ✅ · Dhruv Patel · Fixed fast after demo impact" },
-    { ticket: "DTM-4920", title: "🔥 NEW — Signup Anti-Fraud Gate: OTP + US/Canada Phone Validation", detail: "Critical · Miral Patel · Open · Triggered by CalEdison listing fraud · OTP + NANP phone validation on signup" },
+    { ticket: "DASH-1410", title: "🔥 Contact Intelligence agent not functioning for Sean Fulp's contacts", detail: "Critical · Mark Elmore · To Do" },
+    { ticket: "DASH-1444", title: "🔥 Contact Intelligence API endpoints for Marketplace frontend", detail: "Critical · Ebenge Usip · Ready for Staging ✅ · Due Apr 22" },
+    { ticket: "DASH-1443", title: "🔥 Contact Intelligence dedicated route for Marketplace Intelligence tab", detail: "Critical · Ebenge Usip · Ready for Staging ✅ · Due Apr 22" },
+    { ticket: "DTM-5713", title: "🔥 Listing Console slow to load · impacted Stone Point Capital demo", detail: "Critical · Ready For Deployment ✅ · Dhruv Patel · Fixed fast after demo impact" },
+    { ticket: "DTM-4920", title: "🔥 Signup Anti-Fraud Gate: OTP + US/Canada Phone Validation", detail: "Critical · Miral Patel · Open · Triggered by CalEdison listing fraud · OTP + NANP phone validation on signup" },
     { ticket: "DTM-5644", title: "Security Incident — Azure DEV & QA VMs", detail: "In Progress · Mohit" },
     { ticket: "DASH-1265", title: "Context poisoning — prior query results bleed into follow-up queries", detail: "Critical · Staging QA · Mark Elmore — progressed from Dev Code Review ✅" },
     { ticket: "DTM-5642", title: "CA Upload — PDF renders as unformatted block in marketplace modal", detail: "Critical · Smoke Testing · Vitaly Vinogradov — progressed ✅" },
@@ -224,7 +225,7 @@ s6_health: {
   ]
 },
 ece: {
-  alert: "Campus 56 — Colliers · 4 campaigns · Apr 16. 2,074 total requests · 95.22% delivered · 42.73% open rate · 2.89% bounce · 0 spam. Campaign 4 sent Apr 16 · Subscription Manager restored ✅ — Eitan + Brant now activated. ⚠️ ECE blockers still open: ECE-145 (send timeout 500+ contacts) · ECE-146 (login failure post-large-send) · ECE-158 (CEO: brokerage-scoped campaigns). Uladzi assigned.",
+  alert: "Campus 56 — Colliers · 4 campaigns · Apr 16. 2,074 total requests · 95.22% delivered · 42.73% open rate · 2.89% bounce · 0 spam. Campaign 4 sent Apr 16 · Subscription Manager restored ✅ — Eitan + Brant now activated. ⚠️ ECE blockers still open: ECE-145 (send timeout 500+ contacts) · ECE-146 (login failure post-large-send) · ECE-158 (CEO: brokerage-scoped campaigns) · ECE-165 (AtData valid bucket separation). Uladzi assigned.",
   kpis: [
     { label: "Requests — Campus 56", value: "2,074", sub: "Total · 4 campaigns · Colliers · Apr 16 latest" },
     { label: "Delivery Rate", value: "95.22%", sub: "1,975 delivered · 60 bounced", good: true },
@@ -235,8 +236,9 @@ ece: {
   bugs: [
     { ticket: "ECE-146", title: "🔥 BLOCKER — campaigns.duxre.com login failure after large send", detail: "Platform unresponsive. Uladzi Paulovich · Open.", blocker: true },
     { ticket: "ECE-145", title: "🔥 BLOCKER — Campaign send timeout on large list (500 contacts)", detail: "Bulk sends non-functional. Uladzi Paulovich · Open.", blocker: true },
-    { ticket: "ECE-148", title: "AtData not suppressing invalid addresses before SendGrid send", detail: "High priority · Uladzi Paulovich · Open." },
     { ticket: "ECE-158", title: "🔥 CEO Escalation — Campaign visibility must be brokerage-scoped, not per login", detail: "Very High · Sean Fulp · Uladzi Paulovich · Open · Filed Apr 13", blocker: true },
+    { ticket: "ECE-165", title: "💥 AtData valid bucket separation — separate 'valid' into exportable filter", detail: "High · Uladzislau · Open · Phase 1 · Not May 1 blocker per V2 ticket checklist" },
+    { ticket: "ECE-148", title: "AtData not suppressing invalid addresses before SendGrid send", detail: "High priority · Uladzi Paulovich · Open." },
     { ticket: "ECE-161", title: "💥 Backend: Contact list CRUD + file upload APIs (.xlsx/.csv)", detail: "High · In Progress · Uladzi Paulovich · active dev" },
     { ticket: "ECE-160", title: "💥 UX/UI — My Contact Lists management page design", detail: "High · In Progress · Alex Marakas · design sprint" },
     { ticket: "ECE-149", title: "eric.longo[at]colliers.com — Login timeout on campaigns.duxre.com", detail: "✅ Resolved & Closed Apr 14 · Isolated account issue", resolved: true },
@@ -288,6 +290,6 @@ meta_ads: {
   totalLeads: 603,
   campaign: "duxre | p1 team leader | conversions",
   ctr: "2.5%",
-  note: "Account recovered Apr 20. Campaign relaunched — new April leads flow automatically into HubSpot."
+  note: "Account recovered Apr 20. Campaign relaunched — April 22 noon relaunch confirmed via Slack. New leads flow automatically into HubSpot."
 }
 };
