@@ -44,21 +44,21 @@ s1_leadSources: [
 ],
 s2_ga4: {
   kpis: [
-    { label: "Total Sessions", value: "3,872", sub: "2,800 users · Apr 1–20 2026", color: "#EE3135" },
-    { label: "Daily Sessions · Apr 22", value: "242", sub: "duxre.com 181 · marketplace 61 · from Slack bot", color: "#282828" },
-    { label: "Organic Search", value: "116", sub: "↑ 6x jump from 18 · SSR + SEO fixes working ✅", color: "#EE3135" },
-    { label: "Direct Sessions", value: "1,116", sub: "#1 overall channel · strong brand awareness", color: "#4C4C4E" }
+    { label: "Total Users MTD", value: "3,464", sub: "Apr 1–22 · GA4 Live · duxre.com", color: "#EE3135" },
+    { label: "Paid Social Users", value: "1,280", sub: "#1 channel · LinkedIn + Meta combined · Apr MTD", color: "#282828" },
+    { label: "Direct Users", value: "775", sub: "#2 channel · strong brand awareness · Apr MTD", color: "#EE3135" },
+    { label: "Email Users", value: "637", sub: "#3 channel · cold email + HubSpot sequences · Apr MTD", color: "#4C4C4E" }
   ],
   byChannel: [
-    { label: "Direct", value: 1116, pct: 100 },
-    { label: "LinkedIn", value: 1100, pct: 98 },
-    { label: "Instantly / Cold Email", value: 1069, pct: 96 },
-    { label: "Paid Social", value: 1067, pct: 96 },
-    { label: "Email", value: 726, pct: 65 },
-    { label: "Unassigned", value: 309, pct: 28 },
-    { label: "Referral", value: 224, pct: 20 },
-    { label: "Paid Search", value: 146, pct: 13 },
-    { label: "Organic Search", value: 116, pct: 10, badge: "↑6x" }
+    { label: "Paid Social (LinkedIn + Meta)", value: 1280, pct: 100 },
+    { label: "Direct", value: 775, pct: 61 },
+    { label: "Email", value: 637, pct: 50 },
+    { label: "Unassigned", value: 334, pct: 26 },
+    { label: "Paid Search (Google)", value: 176, pct: 14 },
+    { label: "Referral", value: 89, pct: 7 },
+    { label: "Organic Shopping", value: 85, pct: 7 },
+    { label: "Organic Search", value: 43, pct: 3 },
+    { label: "Organic Social", value: 22, pct: 2 }
   ],
   byCity: [
     { label: "Ashburn, VA", value: 430, note: "AWS datacenter (bots/crawlers)" },
